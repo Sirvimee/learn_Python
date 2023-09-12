@@ -16,13 +16,6 @@ twenty_euros = amount % 100 % 50 // 20  # How many 20€ banknotes
 ten_euros = amount % 100 % 50 % 20 // 10  # How many 10€ banknotes
 five_euros = amount % 100 % 50 % 20 % 10 // 5  # How many 5€ banknotes
 one_euros = amount % 100 % 50 % 20 % 10 % 5 // 1  # How many 1€ banknotes
-banknotes = (str("100€, " * one_hundred_euros) +
-             str("50€, " * fifty_euros) +
-             str("20€, " * twenty_euros) +
-             str("10€, " * ten_euros) +
-             str("5€, " * five_euros) +
-             str("1€, " * one_euros))
-
-banknotes = banknotes.rstrip(', ')  # Remove comma and space at the end of the sentence
+banknotes = one_hundred_euros + fifty_euros + twenty_euros + ten_euros + five_euros + one_euros
 
 print(f"Amount of banknotes needed: {banknotes}")

@@ -28,7 +28,7 @@ print(i % j)
 
 """Divide k by l. Print out the floor value. Use an arithmetic operator."""
 k = int(input("Enter the value for k: "))
-l = int(input("Enter the value for l: "))
+l: int = int(input("Enter the value for l: "))
 print(math.floor(k / l))
 
 """Calculate m raised to the power of n. Print out the result."""

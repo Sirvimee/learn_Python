@@ -38,7 +38,7 @@ c = int(input("Enter the value of c: "))
 d = int(input("Enter the value of d: "))
 average_of_multiplied_numbers = (a * 1 + b * 2 + c * 3 + d * 4) / 4
 
-if average_of_multiplied_numbers % 2 == 0: # The if statement is executed if number is even
+if average_of_multiplied_numbers % 2 == 0:  # The if statement is executed if number is even
     print(int(average_of_multiplied_numbers))
 else:
     print(average_of_multiplied_numbers)
@@ -106,7 +106,7 @@ output
 """
 ects = int(input("Enter the amount of ECTS: "))
 weeks = int(input("Enter the number of weeks: "))
-total_hours_for_study = ects * 26 # Find out how many hours it takes to study in total
+total_hours_for_study = ects * 26  # Find out how many hours it takes to study in total
 
 if weeks != 0:
     hours_per_week = total_hours_for_study // weeks
