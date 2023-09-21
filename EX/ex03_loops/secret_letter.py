@@ -38,6 +38,9 @@ def secret_letter(letter: str) -> bool:
         else:
             return False
 
+    if sum_of_digits > uppercase_chars:
+        return False
+
 
 if __name__ == '__main__':
     print(secret_letter("sOMEteSTLETTer8"))  # True
