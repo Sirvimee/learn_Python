@@ -21,16 +21,13 @@ def secret_letter(letter: str) -> bool:
     for char in letter:
         if char.islower():
             lowercase_chars += 1
-        if char.isupper():
+        elif char.isupper():
             uppercase_chars += 1
+        elif char.isdigit():
+            sum_of_digits += int(char)
 
     if uppercase_chars <= lowercase_chars:
         return False
-
-    if uppercase_chars > lowercase_chars:
-        for char in letter:
-            if char.isdigit():
-                sum_of_digits += int(char)
 
     if sum_of_digits <= uppercase_chars:
         if sum_of_digits >= lowercase_chars:
