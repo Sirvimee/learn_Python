@@ -28,21 +28,15 @@ def encode(message: str, shift: int) -> str:
     encoded_message = ""
 
     for letter in message:
-        if letter == " ":
-            encoded_message += letter
-        elif letter == "'":
-            encoded_message += letter
-        elif letter == ".":
-            encoded_message += letter
-        elif letter.isdigit():
-            encoded_message += letter
-        else:
+        if letter.isalpha():
             new_letter = english_alphabet.find(letter) + shift
             if new_letter == len(english_alphabet):
                 new_letter = 0
             if new_letter > len(english_alphabet):
                 new_letter = new_letter - len(english_alphabet)
             encoded_message += english_alphabet[new_letter]
+        else:
+            encoded_message += letter
     return encoded_message
 
 

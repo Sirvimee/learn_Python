@@ -24,21 +24,19 @@ def secret_letter(letter: str) -> bool:
         if char.isupper():
             uppercase_chars += 1
 
+    if uppercase_chars <= lowercase_chars:
+        return False
 
     if uppercase_chars > lowercase_chars:
         for char in letter:
             if char.isdigit():
                 sum_of_digits += int(char)
 
-
     if sum_of_digits <= uppercase_chars:
         if sum_of_digits >= lowercase_chars:
             return True
         else:
             return False
-
-    else:
-        return False
 
 
 if __name__ == '__main__':
