@@ -22,23 +22,23 @@ def inflation(n: int, goal: int) -> int:
     :return: new number
     """
     while n < goal:
-        if n == goal // 2:
+        if n == goal / 2:
             n *= 2
             break
 
-        if n >= 10000:
+        elif n >= 10000:
             n *= 7
 
-        if n in range(1000, 10000):
+        elif n in range(1000, 10000):
             n *= 2
 
-        if n in range(100, 1000):
+        elif n in range(100, 1000):
             n *= 3
 
-        if n in range(10, 100):
+        elif n in range(10, 100):
             n *= 4
 
-        if n in range(0, 10):
+        elif n in range(0, 10):
             n *= 5
 
     return n

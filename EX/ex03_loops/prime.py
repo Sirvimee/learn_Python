@@ -17,11 +17,16 @@ def is_prime_number(number: int) -> bool:
     if number == 2:
         return True
 
+    count = 0
+
     for num in range(2, number):
         if number % num == 0:
-            return False
-        else:
-            return True
+            count += 1
+
+    if count != 0:
+        return False
+    else:
+        return True
 
 
 if __name__ == '__main__':
