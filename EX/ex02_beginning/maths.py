@@ -38,10 +38,10 @@ c = int(input("Enter the value of c: "))
 d = int(input("Enter the value of d: "))
 average_of_multiplied_numbers = (a * 1 + b * 2 + c * 3 + d * 4) / 4
 
-if average_of_multiplied_numbers % 2 == 0:  # The if statement is executed if number is even
-    print(int(average_of_multiplied_numbers))
-else:
-    print(average_of_multiplied_numbers)
+# if average_of_multiplied_numbers % 2 == 0:  # The if statement is executed if number is even
+   # " print(int(average_of_multiplied_numbers))
+# else:
+print(average_of_multiplied_numbers)
 
 """
 Calculate the sum of two fractions.
