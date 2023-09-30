@@ -81,11 +81,8 @@ def is_valid_email_address(email: str):
     :param email: Email to be checked
     :return: True if the email is valid, False otherwise.
     """
-
     return (
-        has_at_symbol(email) and
-        is_valid_username(email) and
-        is_valid_domain(email)
+        has_at_symbol(email) and is_valid_username(email) and is_valid_domain(email)
     )
 
 
@@ -141,4 +138,3 @@ if __name__ == '__main__':
     print(create_email_address("jaani.org", "lennakuurma"))  # -> lennakuurma@jaani.org
     print(create_email_address("koobas.com",
                                "karu&pojad"))  # -> Cannot create a valid email address using the given parameters!
-
