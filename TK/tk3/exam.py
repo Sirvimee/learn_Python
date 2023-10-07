@@ -68,7 +68,6 @@ def sum_of_a_beach(s: str) -> int:
 
     for word in words:
         counter += s.count(word)
-
     return counter
 
 
