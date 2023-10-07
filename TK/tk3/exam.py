@@ -14,9 +14,7 @@ def common_end(a: list, b: list) -> bool:
     :param b: List of integers.
     :return: The last or the first elements are the same.
     """
-    if a[0] == b[0] or a[-1] == b[-1]:
-        return True
-    return False
+    return True if a[0] == b[0] or a[-1] == b[-1] else False
 
 
 def alarm_clock(day: int, vacation: bool) -> str:
@@ -40,7 +38,10 @@ def alarm_clock(day: int, vacation: bool) -> str:
     :return: String when to set alarm clock.
     """
     if vacation:
-        return "off"
+        if 1 <= day <= 5:
+            return "10:00"
+        else:
+            return "off"
     elif 1 <= day <= 5 and not vacation:
         return "08:00"
     else:
@@ -67,6 +68,7 @@ def sum_of_a_beach(s: str) -> int:
 
     for word in words:
         counter += s.count(word)
+
     return counter
 
 
