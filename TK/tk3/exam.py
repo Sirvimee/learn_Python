@@ -37,14 +37,15 @@ def alarm_clock(day: int, vacation: bool) -> str:
     :param vacation: Whether it is vacation.
     :return: String when to set alarm clock.
     """
-    if 1 <= day <= 5 and vacation == False:
+    if vacation:
+        if 0 <= day <= 4:
+            return "10:00"
+        else:
+            return "off"
+    elif 0 <= day <= 4 and not vacation:
         return "08:00"
-    elif 1 <= day <= 5 and vacation:
-        return "10:00"
-    elif 6 <= day <= 7 and vacation == False:
-        return "10:00"
     else:
-        return "off"
+        return "10:00"
 
 
 def sum_of_a_beach(s: str) -> int:
@@ -86,12 +87,13 @@ def min_index_value(nums: list) -> int:
     :return: Minimum value of two elements at positions of the first and the last element value.
     """
     a = nums[nums[0]]
-    if nums[-1] < len(nums):
+    if nums[-1] >= len(nums):
+        return -1
+    else:
         b = nums[nums[-1]]
         if a > b:
             return b
         return a
-    return -1
 
 
 def mirror_ends(s: str) -> str:
