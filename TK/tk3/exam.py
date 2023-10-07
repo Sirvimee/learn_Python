@@ -37,16 +37,14 @@ def alarm_clock(day: int, vacation: bool) -> str:
     :param vacation: Whether it is vacation.
     :return: String when to set alarm clock.
     """
-    if vacation:
-        if 1 <= day <= 5:
-            return "10:00"
-        else:
-            return "off"
-
     if 1 <= day <= 5 and not vacation:
         return "08:00"
-    else:
+    elif 1 <= day <= 5 and vacation:
         return "10:00"
+    elif 6 <= day <= 7 and not vacation:
+        return "10:00"
+    else:
+        return "off"
 
 
 def sum_of_a_beach(s: str) -> int:
