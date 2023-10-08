@@ -87,7 +87,7 @@ def min_index_value(nums: list) -> int:
     :return: Minimum value of two elements at positions of the first and the last element value.
     """
     a = nums[nums[0]]
-    if nums[-1] >= len(nums):
+    if nums[-1] >= len(nums) or nums[1] >= len(nums):
         return -1
     else:
         b = nums[nums[-1]]
@@ -105,15 +105,20 @@ def mirror_ends(s: str) -> str:
 
     For example, the string "abXYZba" has the mirror end "ab".
 
-    mirror_ends("abXYZba") → "ab"  abZYXba
+    mirror_ends("abXYZba") → "ab"
     mirror_ends("abca") → "a"
     mirror_ends("aba") → "aba"
+    mirror_ends("1XYZb1")  "1"
 
     :param s: String
     :return: Mirror image string
     """
     reversed_s = s[::-1]
+    count = 0
 
-    while reversed_s not in s:
-        reversed_s = reversed_s[:-1]
-    return reversed_s
+    for letter in range(len(s)):
+        if s[letter] == reversed_s[letter]:
+            count += 1
+        else:
+            break
+    return s[:count]
