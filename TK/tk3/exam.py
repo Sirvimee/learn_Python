@@ -86,14 +86,13 @@ def min_index_value(nums: list) -> int:
     :param nums: List of non-negative integers.
     :return: Minimum value of two elements at positions of the first and the last element value.
     """
-    a = nums[nums[0]]
-    if nums[-1] >= len(nums) or nums[1] >= len(nums):
-        return -1
+    first_index = nums[0]
+    last_index = nums[-1]
+
+    if 0 <= first_index < len(nums) and 0 <= last_index < len(nums):
+        return min(nums[first_index], nums[last_index])
     else:
-        b = nums[nums[-1]]
-        if a > b:
-            return b
-        return a
+        return -1
 
 
 def mirror_ends(s: str) -> str:
