@@ -10,7 +10,10 @@ def list_of_phones(all_phones: str) -> list:
 
     "Google Pixel,Honor Magic5,Google Pixel" => ["Google Pixel', 'Honor Magic5', 'Google Pixel"]
     """
-    return all_phones.split(",")
+    if all_phones:
+        list_of_phones = all_phones.split(",")
+        return list_of_phones
+    return []
 
 
 def phone_brands(all_phones: str) -> list:
@@ -24,10 +27,11 @@ def phone_brands(all_phones: str) -> list:
     list_of_phones = all_phones.split(",")
     list_of_brands = []
 
-    for phone in list_of_phones:
-        brand = phone.split(" ")
-        if brand[0] not in list_of_brands:
-            list_of_brands.append(brand[0])
+    if all_phones:
+        for phone in list_of_phones:
+            brand = phone.split(" ")
+            if brand[0] not in list_of_brands:
+                list_of_brands.append(brand[0])
 
     return list_of_brands
 
@@ -43,11 +47,12 @@ def phone_models(all_phones: str) -> list:
     list_of_phones = all_phones.split(",")
     list_of_models = []
 
-    for phone in list_of_phones:
-        model = phone.split(" ")
-        model = " ".join(model[1:])
-        if model[1:len(model)] not in list_of_models:
-            list_of_models.append(model)
+    if all_phones:
+        for phone in list_of_phones:
+            model = phone.split(" ")
+            model = " ".join(model[1:])
+            if model not in list_of_models:
+                list_of_models.append(model)
 
     return list_of_models
 
@@ -63,7 +68,8 @@ def search_by_brand(all_phones: str, search_brand: str) -> list:
     found_phones = []
 
     for phone in list_of_phones:
-        if search_brand.lower() in phone.lower():
+        phone_brand = phone.split()[0]
+        if search_brand.lower() == phone_brand.lower():
             found_phones.append(phone)
 
     return found_phones
