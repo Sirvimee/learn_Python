@@ -1,3 +1,6 @@
+"""Phone inventory."""
+
+
 def phone_brand_and_models(all_phones: str):
     """
     Create a list of structured information about brands and models.
@@ -33,7 +36,7 @@ def phone_brand_and_models(all_phones: str):
 
         return brand_model_list
 
-    return[]
+    return []
 
 
 def add_phones(phone_list, all_phones) -> list:
@@ -97,7 +100,7 @@ def phone_list_as_string(phone_list: list) -> str:
     phone_strings = []
 
     for brand, models in phone_list:
-        model_strings = ", ".join(models)
-        phone_strings.append(f"{brand} {model_strings}")
+        brand_models = [f"{brand} {model}" for model in models]
+        phone_strings.extend(brand_models)
 
     return ",".join(phone_strings)
