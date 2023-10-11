@@ -85,7 +85,18 @@ def number_of_phones(all_phones: str) -> list:
 
     "IPhone 12,Samsung Galaxy S22,IPhone 11"
     """
-    return []
+    phones = all_phones.split(",")
+    counted_phones = {}
+
+    for phone in phones:
+        brand_name = phone.split()[0]
+
+        if brand_name in counted_phones:
+            counted_phones[brand_name] += 1
+        else:
+            counted_phones[brand_name] = 1
+
+    return list(counted_phones.items())
 
 
 def phone_list_as_string(phone_list: list) -> str:
