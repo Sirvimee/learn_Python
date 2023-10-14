@@ -69,7 +69,9 @@ def flights_to_destination(flights: list, destination: str) -> list:
     for city, times in flights_times.items():
         if city == destination:
             return sorted(list(times))
-        return []
+        break
+
+    return []
 
 
 def flights_schedule(flights: list) -> dict:
@@ -95,7 +97,7 @@ def flights_schedule(flights: list) -> dict:
         flight_nr = flight.split(",")[3]
 
         if time in flights_schedule:
-            flights_schedule[time].append((destination,flight_nr))
+            flights_schedule[time].append((destination, flight_nr))
         else:
             flights_schedule[time] = (destination, flight_nr)
 
@@ -162,7 +164,10 @@ def destinations_by_airline(schedule: dict, airline_names: dict) -> dict:
     for time, flight in schedule.items():
         for short, airline in airline_names.items():
             if flight[1][0:3] == short:
-                destinations[airline] = {flight[0]}
+                if airline in destinations:
+                    destinations[airline].add(flight[0])
+                else:
+                    destinations[airline] = {flight[0]}
 
     return destinations
 
@@ -187,7 +192,7 @@ if __name__ == '__main__':
     print(flights_schedule(flights))
     # {'08:00': ('Tallinn', 'OWL1234'), '10:35': ('Helsinki', 'BHM5678'), '09:00': ('Tallinn', 'OWL1235')}
 
-    schedule = {'08:00': ('Tallinn', 'OWL1234'), '10:35': ('Helsinki', 'BHM5678'), '09:00': ('Tallinn', 'OWL1235')}
+    schedule = {'08:00': ('Tallinn', 'OWL1234'), '10:35': ('Helsinki', 'BHM5678'), '09:00': ('Riga', 'OWL1235')}
     print(destinations_list(schedule))
     # ['Helsinki', 'Tallinn']
 
