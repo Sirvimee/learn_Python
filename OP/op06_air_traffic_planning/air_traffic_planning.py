@@ -129,7 +129,8 @@ def connecting_flights(schedule: dict[str, tuple[str, str]], arrival: tuple[str,
     for time, flight in schedule.items():
         flight_time = int(time.split(":")[0]) * 60 + int(time.split(":")[1])
         if first_flight <= flight_time < last_flight:
-            connecting_flights.append((time, flight[0]))
+            if flight[0] != arrival[1]:
+                connecting_flights.append((time, flight[0]))
 
     return connecting_flights
 
