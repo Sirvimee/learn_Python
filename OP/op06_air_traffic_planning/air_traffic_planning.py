@@ -1,8 +1,11 @@
 """Air traffic planning."""
 
 
-def update_delayed_flight(schedule: dict[str, tuple[str, str]], delayed_flight_number: str, new_departure_time: str) -> \
-dict[str, tuple[str, str]]:
+def update_delayed_flight(
+    schedule: dict[str, tuple[str, str]],
+    delayed_flight_number: str,
+    new_departure_time: str
+) -> dict[str, tuple[str, str]]:
     """
     Update the departure time of a delayed flight in the flight schedule.
 
@@ -117,7 +120,18 @@ def connecting_flights(schedule: dict[str, tuple[str, str]], arrival: tuple[str,
              ]
              If no connecting flights are available, the function returns an empty list.
     """
-    pass
+    arrival_time = arrival[0].split(":")
+    arrival_time_in_minutes = int(arrival_time[0]) * 60 + int(arrival_time[1])
+    first_flight = arrival_time_in_minutes + 45
+    last_flight = arrival_time_in_minutes + 240
+    connecting_flights = []
+
+    for time, flight in schedule.items():
+        flight_time = int(time.split(":")[0]) * 60 + int(time.split(":")[1])
+        if first_flight <= flight_time < last_flight:
+            connecting_flights.append((time, flight[0]))
+
+    return connecting_flights
 
 
 def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
@@ -140,7 +154,23 @@ def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
              ["08:00", "15:20"]
              If the schedule is empty, returns an empty list.
     """
-    pass
+    schedule_times = {}
+    count = 0
+    returning_list = []
+
+    for time in schedule:
+        flight_time = int(time.split(":")[0]) * 60 + int(time.split(":")[1])
+        for times in schedule:
+            time_in_minutes = int(times.split(":")[0]) * 60 + int(times.split(":")[1])
+            if flight_time < time_in_minutes < flight_time + 60:
+                schedule_times[time] = count + 1
+
+    sorted_schedule_times = dict(sorted(schedule_times.items(), key=lambda x: x[1], reverse=True))
+
+    for time in sorted_schedule_times:
+        returning_list.append(time)
+
+    return returning_list
 
 
 def most_popular_destination(schedule: dict[str, tuple[str, str]], passenger_count: dict[str, int]) -> str:
@@ -154,7 +184,20 @@ def most_popular_destination(schedule: dict[str, tuple[str, str]], passenger_cou
                             the number of passengers as values.
     :return: A string representing the most popular destination.
     """
-    pass
+    counted_passenger_dict = {}
+
+    for plane, passenger in passenger_count.items():
+        for flight in schedule.values():
+            if plane == flight[1]:
+                if flight[0] in counted_passenger_dict:
+                    counted_passenger_dict[flight[0]] += passenger
+                else:
+                    counted_passenger_dict[flight[0]] = passenger
+
+    sorted_destination = list(sorted(counted_passenger_dict.items(), key=lambda x: x[1], reverse=True))
+    popular_destination = sorted_destination[0][0]
+
+    return popular_destination
 
 
 def least_popular_destination(schedule: dict[str, tuple[str, str]], passenger_count: dict[str, int]) -> str:
@@ -168,7 +211,20 @@ def least_popular_destination(schedule: dict[str, tuple[str, str]], passenger_co
                             the number of passengers as values.
     :return: A string representing the least popular destination.
     """
-    pass
+    counted_passenger_dict = {}
+
+    for plane, passenger in passenger_count.items():
+        for flight in schedule.values():
+            if plane == flight[1]:
+                if flight[0] in counted_passenger_dict:
+                    counted_passenger_dict[flight[0]] += passenger
+                else:
+                    counted_passenger_dict[flight[0]] = passenger
+
+    sorted_destination = list(sorted(counted_passenger_dict.items(), key=lambda x: x[1]))
+    least_popular_destination = sorted_destination[0][0]
+
+    return least_popular_destination
 
 
 if __name__ == '__main__':
