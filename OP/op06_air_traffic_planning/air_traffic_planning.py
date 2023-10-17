@@ -156,15 +156,18 @@ def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
              If the schedule is empty, returns an empty list.
     """
     schedule_times = {}
-    count = 0
     returning_list = []
 
-    for time in schedule:
-        flight_time = int(time.split(":")[0]) * 60 + int(time.split(":")[1])
-        for times in schedule:
-            time_in_minutes = int(times.split(":")[0]) * 60 + int(times.split(":")[1])
-            if flight_time < time_in_minutes < flight_time + 60:
-                schedule_times[time] = count + 1
+    for time1, flight1 in schedule.items():
+        flight_time1 = int(time1.split(":")[0]) * 60 + int(time1.split(":")[1])
+        for time2, flight2 in schedule.items():
+            if flight1[1] != flight2[1]:
+                time2_in_minutes = int(time2.split(":")[0]) * 60 + int(time2.split(":")[1])
+                if flight_time1 < time2_in_minutes < flight_time1 + 60:
+                    if time1 not in schedule_times:
+                        schedule_times[time1] = 1
+                    else:
+                        schedule_times[time1] += 1
 
     sorted_schedule_times = dict(sorted(schedule_times.items(), key=lambda x: x[1], reverse=True))
 
