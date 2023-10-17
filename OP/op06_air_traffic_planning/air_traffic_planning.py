@@ -162,7 +162,7 @@ def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
         flight_time1 = int(time1.split(":")[0]) * 60 + int(time1.split(":")[1])
         for time2, flight2 in schedule.items():
             time2_in_minutes = int(time2.split(":")[0]) * 60 + int(time2.split(":")[1])
-            if flight_time1 <= time2_in_minutes < flight_time1 + 60:
+            if flight_time1 < time2_in_minutes < flight_time1 + 60:
                 if time1 not in schedule_times:
                     schedule_times[time1] = 1
                 else:
@@ -248,15 +248,16 @@ if __name__ == '__main__':
     # {'11:35': ('Helsinki', 'BHM2345')}
 
     schedule = {
+        "04:35": ("Maardu", "MWL6754"),
         "06:15": ("Tallinn", "OWL6754"),
-        "06:40": ("Tokyo", "BHM7890"),
-        "06:50": ("Dublin", "TRE4567"),
-        "13:15": ("London", "BHM5678"),
-        "14:15": ("London", "BHM5678"),
-        "15:15": ("London", "BHM5678"),
-        "16:15": ("London", "BHM5678"),
-        "17:15": ("London", "BHM5678"),
-        "18:15": ("London", "BHM5678"),
+        "06:30": ("Paris", "OWL6751"),
+        "07:29": ("London", "OWL6756"),
+        "08:00": ("New York", "OWL6759"),
+        "11:30": ("Tokyo", "OWL6752"),
+        "11:35": ("Helsinki", "BHM2345"),
+        "19:35": ("Paris", "BHM2346"),
+        "20:35": ("Helsinki", "BHM2347"),
+        "22:35": ("Tallinn", "TLN1001"),
     }
     print(busiest_time(schedule))
     # ['06', '11']
