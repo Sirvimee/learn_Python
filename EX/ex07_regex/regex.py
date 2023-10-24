@@ -102,7 +102,7 @@ def find_years(text: str) -> list:
     :return: list of years (integers) found in given string
     """
     pattern1 = r"\b\d{4}(?=\D)"
-    pattern2 = "(?<=\D)\d{4}(?=\D)"
+    pattern2 = r"(?<=\D)\d{4}(?=\D)"
     comb_pattern = f"{pattern1}|{pattern2}"
 
     return re.findall(comb_pattern, text)
