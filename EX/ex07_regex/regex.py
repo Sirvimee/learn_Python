@@ -101,10 +101,8 @@ def find_years(text: str) -> list:
     :param text: given string to find years from
     :return: list of years (integers) found in given string
     """
-    pattern1 = r"\b\d{4}(?=\D)"
-    pattern2 = r"(?<=\D)\d{4}(?=\D)"
-    comb_pattern = f"{pattern1}|{pattern2}"
-    numbers_string = re.findall(comb_pattern, text)
+    pattern = r"\b\d{4}(?=\D)|(?<=\D)\d{4}(?=\D)|(?<=\D)\d{4}$"
+    numbers_string = re.findall(pattern, text)
     numbers_int = [int(number) for number in numbers_string]
 
     return numbers_int
@@ -165,6 +163,7 @@ if __name__ == '__main__':
         'See on esimene - ä lause. See, on teine: lause! see ei ole lause. Aga kas see on? jah, oli.'))
     # ['See', 'on', 'esimene', 'ä', 'lause', 'See', 'on', 'teine', 'lause', 'Aga', 'kas', 'see', 'on']
 
+    print(find_years("1998,1998!45676??7777-1234"))
     print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))
     # [1998, 7777]
 
