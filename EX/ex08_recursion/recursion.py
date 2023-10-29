@@ -257,7 +257,7 @@ def x_sum_loop(nums: list, x: int) -> int:
     """
     y = 0
 
-    if len(nums) == 0 or x > len(nums):
+    if len(nums) == 0 or x > len(nums) or x == 0:
         return 0
 
     if x > 0:
@@ -289,13 +289,16 @@ def x_sum_recursion(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    if x == 0 or not nums or x - 1 > len(nums):
+    if x == 0 or not nums:
         return 0
 
     if x < 0:
         return x_sum_recursion(nums[::-1], -x)
 
-    return nums[x - 1] + x_sum_recursion(nums[x:], x)
+    if x - 1 < len(nums):
+        return nums[x - 1] + x_sum_recursion(nums[x:], x)
+    else:
+        return 0
 
 
 def sum_squares(nested_list: list | int) -> int:
@@ -312,15 +315,15 @@ def sum_squares(nested_list: list | int) -> int:
     :param nested_list: list of lists of lists of lists of lists ... and ints
     :return: sum of squares
     """
-    total = 0
-
-    for item in nested_list:
-        if isinstance(item, list):
-            total += sum_squares(item)
-        elif isinstance(item, int):
-            total += item ** 2
-
-    return total
+    if isinstance(nested_list, int):
+        return nested_list ** 2
+    elif isinstance(nested_list, list):
+        if not nested_list:
+            return 0
+        else:
+            return sum_squares(nested_list[0]) + sum_squares(nested_list[1:])
+    else:
+        return 0
 
 
 if __name__ == '__main__':
