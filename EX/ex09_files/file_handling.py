@@ -92,11 +92,13 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
     :return: None
     """
     with open(filename, "w") as f:
-        if len(lines) > 1:
+        if len(lines) == 0:
+            return
+        elif len(lines) == 1:
+            f.write(lines[0])
+        else:
             for line in lines[:-1]:
                 f.write(line.rstrip('\n') + '\n')
-        else:
-            f.write(lines[-1])
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
