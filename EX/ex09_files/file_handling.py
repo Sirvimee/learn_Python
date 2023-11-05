@@ -91,7 +91,7 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
     :param lines: A list of strings, each representing a line to write to the file.
     :return: None
     """
-    with open(filename, "w") as f:
+    with open(filename, "a") as f:
         if len(lines) == 0:
             return
         elif len(lines) == 1:
