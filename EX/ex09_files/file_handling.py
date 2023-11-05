@@ -219,10 +219,11 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list[dict[str, str]]:
     """
     result_list = []
     data = read_csv_file(filename)
-    header = data[0]
 
     if len(data) <= 1:
         return result_list
+
+    header = data[0]
 
     for row in data[1:]:
         values = row
@@ -232,6 +233,8 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list[dict[str, str]]:
         result_list.append(entry)
 
     return result_list
+
+read_csv_file_into_list_of_dicts("test.csv")
 
 
 def write_list_of_dicts_to_csv_file(filename: str, data: list[dict]) -> None:
