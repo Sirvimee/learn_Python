@@ -95,8 +95,8 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
         if len(lines) > 1:
             for line in lines[:-1]:
                 f.write(line.rstrip('\n') + '\n')
-            else:
-                f.write(lines[-1])
+        else:
+            f.write(lines[-1])
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
