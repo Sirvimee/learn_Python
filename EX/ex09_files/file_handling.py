@@ -1,3 +1,4 @@
+"""File handling."""
 import csv
 
 
@@ -15,7 +16,7 @@ def read_file_contents(filename: str) -> str:
 
 
 def read_file_contents_to_list(filename: str) -> list[str]:
-    """
+    r"""
     Read file contents into a list of lines.
 
     In this exercise, assume that the file exists.
@@ -92,7 +93,7 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
     """
     with open(filename, "w") as f:
         for line in lines:
-            f.write(line + '\n' if not line.endswith('\n') else line)
+            f.write(line.rstrip('\n') + '\n')
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
