@@ -58,15 +58,18 @@ def nr_into_num_list(nr: int, num_list: list) -> list:
     nr_into_num_list(0, [1,2,3,4,5]) -> [0,1,2,3,4,5,]
 
     """
-    if not num_list:
-        num_list.append(nr)
-        return num_list
+    if len(num_list) == 0:
+        return [nr]
 
-    for number in num_list[::-1]:
-        if nr >= number:
-            num_list.insert(number, nr)
-            break
-    return num_list
+    if nr < num_list[0]:
+        return [nr] + num_list
+
+    if nr > num_list[-1]:
+        return num_list + [nr]
+
+    for i in range(len(num_list)):
+        if num_list[i] > nr:
+            return num_list[:i] + [nr] + num_list[i:]
 
 
 def symbol_average_position_in_words(words: list) -> dict:
@@ -143,7 +146,7 @@ def str_dist(string: str, sub: str) -> int:
     str_dist("cccatcowcatxx", "cat") => 9
     """
     if string == "" or sub == "":
-        return -1
+        return 0
 
     if string[:len(sub)] == sub and string[-len(sub):] == sub:
         return len(string)
