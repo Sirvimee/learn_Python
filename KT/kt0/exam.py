@@ -44,6 +44,8 @@ def nr_of_common_characters(string1: str, string2: str) -> int:
                     common_chars.append(char1)
 
     return len(common_chars)
+    # teine lahendus
+    # return len(set(string1).intersection(set(string2)))
 
 
 def nr_into_num_list(nr: int, num_list: list) -> list:
@@ -157,3 +159,13 @@ def str_dist(string: str, sub: str) -> int:
         return str_dist(string[:-1], sub)
 
     return str_dist(string[1:-1], sub)
+
+    # teine lahendus
+    # if string == "" or sub == "":
+    #     return 0
+    # if string.startswith(sub) and string.endswith(sub):
+    #     return len(string)
+    # if not string.startswith(sub):
+    #     return str_dist(string[1:], sub)
+    # else:
+    #     return str_dist(string[:-1], sub)

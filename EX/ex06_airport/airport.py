@@ -139,7 +139,7 @@ def airlines_operating_today(schedule: dict, airline_names: dict) -> set:
 
     for time, flight in schedule.items():
         for short, airline in airline_names.items():
-            if flight[1][0:3] == short:
+            if flight[1][:3] == short:
                 airlines.add(airline)
 
     return airlines

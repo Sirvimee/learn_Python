@@ -170,8 +170,11 @@ def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
 
     sorted_schedule_times = dict(sorted(schedule_times.items(), key=lambda x: x[1], reverse=True))
 
-    for time in sorted_schedule_times:
-        returning_list.append(time)
+    for time1, count1 in sorted_schedule_times.items():
+        for time2, count2 in sorted_schedule_times.items():
+            if count1 > count2:
+                if time1 not in returning_list:
+                    returning_list.append(time1)
 
     return returning_list
 
@@ -248,16 +251,11 @@ if __name__ == '__main__':
     # {'11:35': ('Helsinki', 'BHM2345')}
 
     schedule = {
-        "04:35": ("Maardu", "MWL6754"),
-        "06:15": ("Tallinn", "OWL6754"),
-        "06:30": ("Paris", "OWL6751"),
-        "07:29": ("London", "OWL6756"),
         "08:00": ("New York", "OWL6759"),
-        "11:30": ("Tokyo", "OWL6752"),
-        "11:35": ("Helsinki", "BHM2345"),
-        "19:35": ("Paris", "BHM2346"),
-        "20:35": ("Helsinki", "BHM2347"),
-        "22:35": ("Tallinn", "TLN1001"),
+        "08:15": ("Tokyo", "OWL6752"),
+        "08:45": ("Helsinki", "BHM2345"),
+        "15:20": ("Paris", "BHM2346"),
+        "15:45": ("Helsinki", "BHM2347")
     }
     print(busiest_time(schedule))
     # ['06', '11']
