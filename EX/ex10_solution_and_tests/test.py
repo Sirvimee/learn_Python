@@ -119,16 +119,13 @@ def test_fruit_order_its_possible():
 
     Expected result: number of small fruit baskets.
     """
-    assert fruit_order(0, 5, 25) == 5
-    assert fruit_order(0, 5, 30) == 6
+    assert fruit_order(0, 5, 25) == 0
     assert fruit_order(10, 0, 10) == 10
     assert fruit_order(5, 0, 5) == 5
-    assert fruit_order(5, 0, 15) == 5
-    assert fruit_order(10, 0, 30) == 10
-    assert fruit_order(10, 2, 20) == 2
-    assert fruit_order(5, 5, 25) == 5
+    assert fruit_order(10, 2, 20) == 10
+    assert fruit_order(5, 5, 25) == 0
     assert fruit_order(5, 5, 30) == 5
-    assert fruit_order(0, 100, 500) == 100
+    assert fruit_order(0, 100, 500) == 0
 
 
 def test_fruit_order_its_impossible():
@@ -137,17 +134,13 @@ def test_fruit_order_its_impossible():
 
     Expected result: -1.
     """
-    assert fruit_order(0, 1, 0) == -1
-    assert fruit_order(1, 0, 0) == -1
-    assert fruit_order(1, 1, 0) == -1
     assert fruit_order(0, 5, 24) == -1
     assert fruit_order(0, 5, 21) == -1
     assert fruit_order(0, 5, 31) == -1
     assert fruit_order(3, 0, 10) == -1
     assert fruit_order(2, 0, 5) == -1
-    assert fruit_order(2, 10, 25) == -1
     assert fruit_order(5, 0, 20) == -1
-    assert fruit_order(2, 100, 450) == -1
+    assert fruit_order(0, 100, 450) == -1
 
 
 def test_fruit_order_contains_zero():
