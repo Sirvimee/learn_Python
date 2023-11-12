@@ -7,75 +7,63 @@ from solution import fruit_order
 
 def test_students_study_during_day_with_coffee():
     """
-    The one with the coffee at noon.
+    Test students studying at noon with coffee.
 
-    During the day, students study when there is coffee.
-    This case represents the time period of a day and coffee is present.
     Expected result: True.
     """
-    assert students_study(12, True) is True
     assert students_study(5, True) is True
+    assert students_study(12, True) is True
     assert students_study(17, True) is True
 
 
 def test_students_study_during_day_without_coffee():
     """
-    The one without the coffee at noon.
+    Test students studying at noon without coffee.
 
-    During the day, students study when there is coffee.
-    This case represents the time period of a day and coffee is not present.
     Expected result: False.
     """
-    assert students_study(12, False) is False
     assert students_study(5, False) is False
+    assert students_study(12, False) is False
     assert students_study(17, False) is False
 
 
 def test_students_study_during_evening_with_coffee():
     """
-    The one with the coffee at evening.
+    Test students studying in the evening with coffee.
 
-    During the evening, students study with or without coffee.
-    This case represents the time period of a evening and coffee is present.
     Expected result: True.
     """
-    assert students_study(20, True) is True
     assert students_study(18, True) is True
+    assert students_study(19, True) is True
     assert students_study(24, True) is True
 
 
 def test_students_study_during_evening_without_coffee():
     """
-    The one without the coffee at evening.
+    Test students studying in the evening without coffee.
 
-    During the evening, students study with or without coffee.
-    This case represents the time period of a evening and coffee is not present.
     Expected result: True.
     """
-    assert students_study(20, False) is True
     assert students_study(18, False) is True
+    assert students_study(19, False) is True
     assert students_study(24, False) is True
 
 
 def test_students_study_during_night_with_coffee():
     """
-    The one with the coffee at night.
+    Test students studying at night with coffee.
 
-    During the night, students sleep.
-    This case represents the time period of a night and coffee is present.
     Expected result: False.
     """
     assert students_study(1, True) is False
-    assert students_study(3, True) is False
+    assert students_study(2, True) is False
     assert students_study(4, True) is False
 
 
 def test_students_study_during_night_without_coffee():
     """
-    The one without the coffee at night.
+    Test students studying at night without coffee.
 
-    During the night, students sleep.
-    This case represents the time period of a night and coffee is not present.
     Expected result: False.
     """
     assert students_study(1, False) is False
@@ -85,7 +73,7 @@ def test_students_study_during_night_without_coffee():
 
 def test_lottery_all_numbers_fives():
     """
-    The one with all numbers five.
+    Test when all numbers are fives.
 
     Expected result: 10.
     """
@@ -94,7 +82,7 @@ def test_lottery_all_numbers_fives():
 
 def test_lottery_all_numbers_same_not_fives():
     """
-    The one with all numbers are same but not fives.
+    Test when all numbers are same but not fives.
 
     Expected result: 5.
     """
@@ -107,7 +95,7 @@ def test_lottery_all_numbers_same_not_fives():
 
 def test_lottery_a_not_b_or_c():
     """
-    The one with both b and c are different from a.
+    Test when a is different from b and c.
 
     Expected result: 1.
     """
@@ -119,7 +107,7 @@ def test_lottery_a_not_b_or_c():
 
 def test_lottery_a_same_as_b_or_c():
     """
-    The one with a is same as b or c.
+    Test when a is same as b or c.
 
     Expected result: 0.
     """
@@ -130,7 +118,7 @@ def test_lottery_a_same_as_b_or_c():
 
 def test_fruit_order_its_possible():
     """
-    The one where it's possible to finish the order.
+    Test when it's possible to finish the order.
 
     Expected result: number of small fruit baskets.
     """
@@ -142,7 +130,7 @@ def test_fruit_order_its_possible():
 
 def test_fruit_order_negative_numbers():
     """
-    The one with one or more negative numbers.
+    Test when one or more negative numbers.
 
     Expected result: -1.
     """
@@ -153,7 +141,7 @@ def test_fruit_order_negative_numbers():
 
 def test_fruit_order_its_impossible():
     """
-    The one where it's impossible to finish the order.
+    Test when it's impossible to finish the order.
 
     Expected result: -1.
     """
