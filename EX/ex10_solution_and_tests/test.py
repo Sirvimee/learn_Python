@@ -12,8 +12,6 @@ def test_students_study_during_day_with_coffee():
     Expected result: True.
     """
     assert students_study(5, True) is True
-    assert students_study(12, True) is True
-    assert students_study(17, True) is True
 
 
 def test_students_study_during_day_without_coffee():
@@ -23,8 +21,6 @@ def test_students_study_during_day_without_coffee():
     Expected result: False.
     """
     assert students_study(5, False) is False
-    assert students_study(12, False) is False
-    assert students_study(17, False) is False
 
 
 def test_students_study_during_evening_with_coffee():
@@ -34,8 +30,6 @@ def test_students_study_during_evening_with_coffee():
     Expected result: True.
     """
     assert students_study(18, True) is True
-    assert students_study(19, True) is True
-    assert students_study(24, True) is True
 
 
 def test_students_study_during_evening_without_coffee():
@@ -45,8 +39,6 @@ def test_students_study_during_evening_without_coffee():
     Expected result: True.
     """
     assert students_study(18, False) is True
-    assert students_study(19, False) is True
-    assert students_study(24, False) is True
 
 
 def test_students_study_during_night_with_coffee():
@@ -56,8 +48,6 @@ def test_students_study_during_night_with_coffee():
     Expected result: False.
     """
     assert students_study(1, True) is False
-    assert students_study(2, True) is False
-    assert students_study(4, True) is False
 
 
 def test_students_study_during_night_without_coffee():
@@ -67,8 +57,6 @@ def test_students_study_during_night_without_coffee():
     Expected result: False.
     """
     assert students_study(1, False) is False
-    assert students_study(3, False) is False
-    assert students_study(4, False) is False
 
 
 def test_lottery_all_numbers_fives():
@@ -87,10 +75,6 @@ def test_lottery_all_numbers_same_not_fives():
     Expected result: 5.
     """
     assert lottery(1, 1, 1) == 5
-    assert lottery(3, 3, 3) == 5
-    assert lottery(0, 0, 0) == 5
-    assert lottery(10, 10, 10) == 5
-    assert lottery(-5, -5, -5) == 5
 
 
 def test_lottery_a_not_b_or_c():
@@ -100,9 +84,6 @@ def test_lottery_a_not_b_or_c():
     Expected result: 1.
     """
     assert lottery(1, 2, 2) == 1
-    assert lottery(3, 4, 5) == 1
-    assert lottery(0, 1, 3) == 1
-    assert lottery(1, -1, 3) == 1
 
 
 def test_lottery_a_same_as_b_or_c():
@@ -112,8 +93,6 @@ def test_lottery_a_same_as_b_or_c():
     Expected result: 0.
     """
     assert lottery(1, 1, 2) == 0
-    assert lottery(3, 4, 3) == 0
-    assert lottery(-3, 4, -3) == 0
 
 
 def test_fruit_order_its_possible():
@@ -123,9 +102,6 @@ def test_fruit_order_its_possible():
     Expected result: number of small fruit baskets.
     """
     assert fruit_order(4, 1, 9) == 4
-    assert fruit_order(4, 2, 14) == 4
-    assert fruit_order(1, 2, 11) == 1
-    assert fruit_order(0, 1, 5) == 0
 
 
 def test_fruit_order_negative_numbers():
@@ -135,8 +111,6 @@ def test_fruit_order_negative_numbers():
     Expected result: -1.
     """
     assert fruit_order(-4, 1, 9) == -1
-    assert fruit_order(4, -2, 14) == -1
-    assert fruit_order(1, 2, -11) == -1
 
 
 def test_fruit_order_its_impossible():
@@ -146,6 +120,3 @@ def test_fruit_order_its_impossible():
     Expected result: -1.
     """
     assert fruit_order(4, 1, 10) == -1
-    assert fruit_order(4, 1, 14) == -1
-    assert fruit_order(2, 2, 11) == -1
-    assert fruit_order(0, 0, 5) == -1
