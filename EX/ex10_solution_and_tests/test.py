@@ -1,6 +1,8 @@
 """Test cases for solution."""
 
-from solution import *
+from solution import students_study
+from solution import lottery
+from solution import fruit_order
 
 
 def test_students_study_during_day_with_coffee():
@@ -33,20 +35,20 @@ def test_students_study_during_evening_with_coffee():
     """
     The one with the coffee at evening.
 
-    During the evening, students study when there is no coffee.
+    During the evening, students study with or without coffee.
     This case represents the time period of a evening and coffee is present.
-    Expected result: False.
+    Expected result: True.
     """
-    assert students_study(20, True) is False
-    assert students_study(18, True) is False
-    assert students_study(24, True) is False
+    assert students_study(20, True) is True
+    assert students_study(18, True) is True
+    assert students_study(24, True) is True
 
 
 def test_students_study_during_evening_without_coffee():
     """
     The one without the coffee at evening.
 
-    During the evening, students study when there is no coffee.
+    During the evening, students study with or without coffee.
     This case represents the time period of a evening and coffee is not present.
     Expected result: True.
     """
@@ -84,6 +86,7 @@ def test_students_study_during_night_without_coffee():
 def test_lottery_all_numbers_fives():
     """
     The one with all numbers five.
+
     Expected result: 10.
     """
     assert lottery(5, 5, 5) == 10
@@ -92,6 +95,7 @@ def test_lottery_all_numbers_fives():
 def test_lottery_all_numbers_same_not_fives():
     """
     The one with all numbers are same but not fives.
+
     Expected result: 5.
     """
     assert lottery(1, 1, 1) == 5
@@ -104,6 +108,7 @@ def test_lottery_all_numbers_same_not_fives():
 def test_lottery_a_not_b_or_c():
     """
     The one with both b and c are different from a.
+
     Expected result: 1.
     """
     assert lottery(1, 2, 2) == 1
@@ -115,6 +120,7 @@ def test_lottery_a_not_b_or_c():
 def test_lottery_a_same_as_b_or_c():
     """
     The one with a is same as b or c.
+
     Expected result: 0.
     """
     assert lottery(1, 1, 2) == 0
@@ -125,6 +131,7 @@ def test_lottery_a_same_as_b_or_c():
 def test_fruit_order_its_possible():
     """
     The one where it's possible to finish the order.
+
     Expected result: number of small fruit baskets.
     """
     assert fruit_order(4, 1, 9) == 4
@@ -136,6 +143,7 @@ def test_fruit_order_its_possible():
 def test_fruit_order_negative_numbers():
     """
     The one with one or more negative numbers.
+
     Expected result: -1.
     """
     assert fruit_order(-4, 1, 9) == -1
@@ -146,6 +154,7 @@ def test_fruit_order_negative_numbers():
 def test_fruit_order_its_impossible():
     """
     The one where it's impossible to finish the order.
+
     Expected result: -1.
     """
     assert fruit_order(4, 1, 10) == -1
