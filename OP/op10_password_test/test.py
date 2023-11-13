@@ -140,11 +140,12 @@ def test__includes_number__only_special():
 def test__is_different_from_old_password__same():
     """Test whether password is same as old password."""
     assert password.is_different_from_old_password("Password", "Password") is False
+    assert password.is_different_from_old_password("Password1", "Password") is False
 
 
 def test__is_different_from_old_password__different():
     """Test whether password is different from old password."""
-    assert password.is_different_from_old_password("Password", "Password1") is True
+    assert password.is_different_from_old_password("IamNewPass123", "Password1") is True
 
 
 def test__is_different_from_old_password__empty_old_pass():
