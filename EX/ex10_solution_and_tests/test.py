@@ -34,7 +34,10 @@ def test_students_study_during_evening_with_coffee():
     Expected result: True.
     """
     assert students_study(18, True) is True
+    assert students_study(19, True) is True
     assert students_study(20, True) is True
+    assert students_study(21, True) is True
+    assert students_study(22, True) is True
     assert students_study(23, True) is True
 
 
@@ -45,7 +48,10 @@ def test_students_study_during_evening_without_coffee():
     Expected result: True.
     """
     assert students_study(18, False) is True
+    assert students_study(19, False) is True
+    assert students_study(20, False) is True
     assert students_study(21, False) is True
+    assert students_study(22, False) is True
     assert students_study(23, False) is True
 
 
@@ -124,6 +130,8 @@ def test_fruit_order_its_possible():
     Expected result: number of small fruit baskets.
     """
     assert fruit_order(0, 5, 25) == 0
+    assert fruit_order(1, 3, 15) == 0
+    assert fruit_order(0, 3, 15) == 0
     assert fruit_order(10, 0, 10) == 10
     assert fruit_order(5, 0, 5) == 5
     assert fruit_order(6, 0, 5) == 5
@@ -134,6 +142,8 @@ def test_fruit_order_its_possible():
     assert fruit_order(5, 5, 30) == 5
     assert fruit_order(0, 100, 500) == 0
     assert fruit_order(300, 100, 800) == 300
+    assert fruit_order(44, 150, 792) == 42
+    assert fruit_order(50, 200, 1049) == 49
 
 
 def test_fruit_order_its_impossible():
@@ -147,6 +157,7 @@ def test_fruit_order_its_impossible():
     assert fruit_order(0, 5, 31) == -1
     assert fruit_order(0, 2, 15) == -1
     assert fruit_order(0, 3, 14) == -1
+    assert fruit_order(0, 6, 27) == -1
     assert fruit_order(3, 0, 10) == -1
     assert fruit_order(2, 0, 5) == -1
     assert fruit_order(5, 0, 20) == -1
@@ -154,6 +165,8 @@ def test_fruit_order_its_impossible():
     assert fruit_order(6, 1, 12) == -1
     assert fruit_order(1, 1, 7) == -1
     assert fruit_order(47, 100, 548) == -1
+    assert fruit_order(42, 150, 794) == -1
+    assert fruit_order(47, 200, 1049) == -1
 
 
 def test_fruit_order_contains_zero():
