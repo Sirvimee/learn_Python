@@ -170,6 +170,8 @@ def test__is_different_from_old_password__same():
     assert password.is_different_from_old_password("Password", "password") is False
     assert password.is_different_from_old_password("password", "Password") is False
     assert password.is_different_from_old_password("Password", "Passwod") is False
+    assert password.is_different_from_old_password("password", "PASSWORD") is False
+    assert password.is_different_from_old_password("PASSWORD", "password") is False
     assert password.is_different_from_old_password("Password1", "Passwor1") is False
     assert password.is_different_from_old_password("Password1", "Pssword1") is False
     assert password.is_different_from_old_password("Password", "assword") is False
@@ -184,11 +186,13 @@ def test__is_different_from_old_password__same():
     assert password.is_different_from_old_password("Password", "drowss") is False
     assert password.is_different_from_old_password("Password1", "1drows") is False
     assert password.is_different_from_old_password("Password1", "1drowsso") is False
+    assert password.is_different_from_old_password("PassannaMaria", "OlenMinassaP") is False
 
 
 def test__is_different_from_old_password__different():
     """Test whether password is different from old password."""
     assert password.is_different_from_old_password("IamNewPass123", "Password1") is True
+    assert password.is_different_from_old_password("PassannaMaria", "OlenMinaassaP") is True
 
 
 def test__is_different_from_old_password__empty_old_pass():
