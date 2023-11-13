@@ -39,6 +39,7 @@ def test_students_study_during_evening_with_coffee():
     assert students_study(21, True) is True
     assert students_study(22, True) is True
     assert students_study(23, True) is True
+    assert students_study(24, True) is True
 
 
 def test_students_study_during_evening_without_coffee():
@@ -53,6 +54,7 @@ def test_students_study_during_evening_without_coffee():
     assert students_study(21, False) is True
     assert students_study(22, False) is True
     assert students_study(23, False) is True
+    assert students_study(24, False) is True
 
 
 def test_students_study_during_night_with_coffee():
@@ -140,10 +142,12 @@ def test_fruit_order_its_possible():
     assert fruit_order(3, 5, 13) == 3
     assert fruit_order(4, 5, 23) == 3
     assert fruit_order(5, 5, 30) == 5
+    assert fruit_order(4, 6, 29) == 4
     assert fruit_order(0, 100, 500) == 0
     assert fruit_order(300, 100, 800) == 300
     assert fruit_order(44, 150, 792) == 42
     assert fruit_order(50, 200, 1049) == 49
+    assert fruit_order(120, 200, 1120) == 120
 
 
 def test_fruit_order_its_impossible():
@@ -164,9 +168,11 @@ def test_fruit_order_its_impossible():
     assert fruit_order(6, 0, 7) == -1
     assert fruit_order(6, 1, 12) == -1
     assert fruit_order(1, 1, 7) == -1
+    assert fruit_order(1, 3, 12) == -1
     assert fruit_order(47, 100, 548) == -1
     assert fruit_order(42, 150, 794) == -1
     assert fruit_order(47, 200, 1049) == -1
+    assert fruit_order(119, 200, 1120) == -1
 
 
 def test_fruit_order_contains_zero():
