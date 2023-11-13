@@ -70,6 +70,11 @@ def test__includes_uppercase__only_numbers():
     assert password.includes_uppercase("12345678") is False
 
 
+def test_includes_uppercase__every_uppercase_letter():
+    """Test whether password with every uppercase letter is correct."""
+    assert password.includes_uppercase("ABCDEFGHIJKLMNOPQRSTUVWXYZ") is True
+
+
 def test__includes_lowercase__no_lowercase():
     """Test whether password without lowercase is incorrect."""
     assert password.includes_lowercase("PASSWORD") is False
@@ -78,6 +83,16 @@ def test__includes_lowercase__no_lowercase():
 def test__includes_lowercase__with_lowercase():
     """Test whether password with lowercase is correct."""
     assert password.includes_lowercase("Password") is True
+
+
+def test__includes_lowercase__only_lowercase_letters():
+    """Test whether password with only lowercase is correct."""
+    assert password.includes_lowercase("asdfghjk") is True
+
+
+def test__includes_lowercase__every_lowercase_letter():
+    """Test whether password with every lowercase letter is correct."""
+    assert password.includes_lowercase("abcdefghijklmnopqrstuvwxyz") is True
 
 
 def test_includes_lowercase__empty():
@@ -111,6 +126,12 @@ def test__includes_special__only_special():
     assert password.includes_special("!@#$%^&*()") is True
 
 
+def test__includes_special__includes_whitespace():
+    """Test whether password with whitespace is correct."""
+    assert password.includes_special("Password 123") is True
+    assert password.includes_special("Hello World") is True
+
+
 def test__includes_special__only_numbers():
     """Test whether password with only numbers is incorrect."""
     assert password.includes_special("12345678") is False
@@ -127,6 +148,11 @@ def test__includes_number__with_number():
     assert password.includes_number("12345AbC") is True
 
 
+def test__includes_number__every_number():
+    """Test whether password with every number is correct."""
+    assert password.includes_number("1234567890") is True
+
+
 def test__includes_number__empty():
     """Test whether empty password is incorrect."""
     assert password.includes_number("") is False
@@ -141,6 +167,23 @@ def test__is_different_from_old_password__same():
     """Test whether password is same as old password."""
     assert password.is_different_from_old_password("Password", "Password") is False
     assert password.is_different_from_old_password("Password1", "Password") is False
+    assert password.is_different_from_old_password("Password", "password") is False
+    assert password.is_different_from_old_password("password", "Password") is False
+    assert password.is_different_from_old_password("Password", "Passwod") is False
+    assert password.is_different_from_old_password("Password1", "Passwor1") is False
+    assert password.is_different_from_old_password("Password1", "Pssword1") is False
+    assert password.is_different_from_old_password("Password", "assword") is False
+    assert password.is_different_from_old_password("Password1", "sswor1") is False
+    assert password.is_different_from_old_password("Password1", "ssword1") is False
+    assert password.is_different_from_old_password("Password", "Passw") is False
+    assert password.is_different_from_old_password("Password1", "Password") is False
+    assert password.is_different_from_old_password("Password1", "Passwod") is False
+    assert password.is_different_from_old_password("Password", "drowssaP") is False
+    assert password.is_different_from_old_password("Password1", "1drowssap") is False
+    assert password.is_different_from_old_password("Password1", "1drowsswop") is False
+    assert password.is_different_from_old_password("Password", "drowss") is False
+    assert password.is_different_from_old_password("Password1", "1drows") is False
+    assert password.is_different_from_old_password("Password1", "1drowsso") is False
 
 
 def test__is_different_from_old_password__different():
