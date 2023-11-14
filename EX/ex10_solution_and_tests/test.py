@@ -149,6 +149,7 @@ def test_fruit_order_its_possible():
     assert fruit_order(44, 150, 792) == 42
     assert fruit_order(50, 200, 1049) == 49
     assert fruit_order(120, 200, 1120) == 120
+    assert fruit_order(1000, 2000, 10000) == 0
 
 
 def test_fruit_order_its_impossible():
