@@ -199,6 +199,7 @@ def test__is_different_from_old_password__different():
     assert password.is_different_from_old_password("IamNewPass123", "Password1") is True
     assert password.is_different_from_old_password("PassannaMaria", "OlenMinaassaP") is True
     assert password.is_different_from_old_password("PassannaMaria", "lenMinaassaP") is True
+    assert password.is_different_from_old_password("PassannaMaria", "lenMinaassaP") is True
 
 
 def test__is_different_from_old_password__empty_old_pass():

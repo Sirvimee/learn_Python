@@ -139,6 +139,7 @@ def test_fruit_order_its_possible():
     assert fruit_order(6, 0, 5) == 5
     assert fruit_order(10, 2, 20) == 10
     assert fruit_order(5, 5, 25) == 0
+    assert fruit_order(4, 6, 29) == 4
     assert fruit_order(3, 5, 13) == 3
     assert fruit_order(4, 5, 23) == 3
     assert fruit_order(5, 5, 30) == 5
@@ -173,6 +174,7 @@ def test_fruit_order_its_impossible():
     assert fruit_order(42, 150, 794) == -1
     assert fruit_order(47, 200, 1049) == -1
     assert fruit_order(119, 200, 1120) == -1
+    assert fruit_order(1190, 2000, 11200) == -1
 
 
 def test_fruit_order_contains_zero():
