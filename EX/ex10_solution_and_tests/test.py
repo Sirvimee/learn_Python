@@ -176,7 +176,7 @@ def test_fruit_order_its_impossible():
     assert fruit_order(42, 150, 794) == -1
     assert fruit_order(47, 200, 1049) == -1
     assert fruit_order(119, 200, 1120) == -1
-    assert fruit_order(1190, 2000, 11200) == -1
+    assert fruit_order(3, 201, 1004) == -1
 
 
 def test_fruit_order_contains_zero():
