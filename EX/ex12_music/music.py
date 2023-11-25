@@ -47,7 +47,7 @@ class Note:
 
     def __lt__(self, other):
         """
-        Compares notes based on their alphabetical order.
+        Compare notes based on their alphabetical order.
 
         Returns: True if the current note is alphabetically less than the other note, False otherwise.
         """
@@ -192,10 +192,12 @@ class Chords:
         :param chord: Chord to be added.
         """
         for chord_item in self.chords:
-            if chord_item.note_one == chord_item.note_two:
+            if chord_item.note_one == chord.note_one and chord_item.note_two == chord.note_two:
                 raise ChordOverlapException
-            if chord_item.note_three is not None:
-                if chord_item.note_one == chord_item.note_three or chord_item.note_two == chord_item.note_three:
+            if chord_item.note_one == chord.note_two and chord_item.note_two == chord.note_one:
+                raise ChordOverlapException
+            if chord_item.note_three is not None and chord.note_three is not None:
+                if chord_item.note_one == chord.note_three or chord_item.note_two == chord.note_three:
                     raise ChordOverlapException
 
         if chord not in self.chords:
