@@ -188,7 +188,7 @@ class Chords:
 
         Add whatever you need to make this class function.
         """
-        self.chords = []
+        self.chords = set()
 
     def add(self, chord: Chord) -> None:
         """
@@ -208,7 +208,7 @@ class Chords:
                     raise ChordOverlapException
 
         if chord not in self.chords:
-            self.chords.append(chord)
+            self.chords.add(chord)
 
     def get(self, first_note: Note, second_note: Note, third_note: Note = None) -> Chord | None:
         """
