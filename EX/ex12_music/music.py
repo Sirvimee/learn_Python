@@ -163,6 +163,13 @@ class Chord:
             if self.note_one == self.note_three or self.note_two == self.note_three:
                 raise DuplicateNoteNamesException
 
+        if self.chord_name == self.note_one.note or self.chord_name == self.note_two.note:
+            raise DuplicateNoteNamesException
+
+        if self.note_three is not None:
+            if self.chord_name == self.note_three.note:
+                raise DuplicateNoteNamesException
+
     def __repr__(self) -> str:
         """
         Chord representation.
