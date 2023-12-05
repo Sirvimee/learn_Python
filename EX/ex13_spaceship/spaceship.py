@@ -1,10 +1,11 @@
-""" Spaceship."""
+"""Spaceship."""
 
 
 class Crewmate:
     """Crewmate class."""
 
     def __init__(self, color: str, role: str, tasks: int = 10):
+        """Initialize a Crewmate object."""
         self.color = color.title()
         self.role = role.title()
         self.tasks = tasks
@@ -15,9 +16,11 @@ class Crewmate:
             self.role = "Crewmate"
 
     def __repr__(self):
+        """Return a string representation of the Crewmate object."""
         return f"{self.color}, role: {self.role}, tasks left: {self.tasks}."
 
     def complete_task(self):
+        """Complete a task."""
         self.tasks -= 1
 
 
@@ -25,10 +28,12 @@ class Impostor:
     """Impostor class."""
 
     def __init__(self, color: str):
+        """Initialize an Impostor object."""
         self.color = color.capitalize()
         self.kills = 0
 
     def __repr__(self):
+        """Return a string representation of the Impostor object."""
         return f"Impostor {self.color}, kills: {self.kills}."
 
 
@@ -36,11 +41,13 @@ class Spaceship:
     """Spaceship class."""
 
     def __init__(self):
+        """Initialize a Spaceship object."""
         self.crewmate_list = []
         self.impostor_list = []
         self.dead_players = []
 
     def get_crewmate_list(self):
+        """Return a string of all crewmates in the spaceship."""
         if len(self.crewmate_list) > 0:
             crewmates = ", ".join(crewmate.color for crewmate in self.crewmate_list[0: len(self.crewmate_list) - 1])
             last_crewmate = self.crewmate_list[-1].color
@@ -48,6 +55,7 @@ class Spaceship:
         return self.crewmate_list
 
     def get_impostor_list(self):
+        """Return a string of all impostors in the spaceship."""
         if len(self.impostor_list) > 0:
             impostors = ", ".join(impostor.color for impostor in self.impostor_list[0: len(self.impostor_list) - 1])
             last_impostor = self.impostor_list[-1].color
@@ -55,14 +63,17 @@ class Spaceship:
         return self.impostor_list
 
     def get_dead_players(self):
+        """Return a string of all dead players in the spaceship."""
         return ", ".join(player.color for player in self.dead_players)
 
     def add_crewmate(self, crewmate):
+        """Add a crewmate to the spaceship."""
         if not isinstance(crewmate, Impostor):
             if crewmate not in self.crewmate_list and crewmate not in self.impostor_list:
                 self.crewmate_list.append(crewmate)
 
     def add_impostor(self, impostor):
+        """Add an impostor to the spaceship."""
         if not isinstance(impostor, Crewmate):
             if (impostor.color not in [c.color for c in self.crewmate_list] and
                     impostor.color not in [c.color for c in self.impostor_list]):
@@ -70,6 +81,7 @@ class Spaceship:
                     self.impostor_list.append(impostor)
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
+        """If the Crewmate is sheriff, he can kill an impostor."""
         if sheriff.role == "Sheriff":
             if color.title() in self.impostor_list:
                 self.impostor_list.remove(color.title())
@@ -78,12 +90,14 @@ class Spaceship:
                 self.dead_players.append(sheriff)
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
+        """If the Crewmate is altruist, he can revive a crewmate."""
         self.crewmate_list.append(dead_crewmate)
         self.dead_players.remove(dead_crewmate)
         self.dead_players.append(altruist)
         self.crewmate_list.remove(altruist)
 
     def protect_crewmate(self, guardian_angel: Crewmate, crewmate_to_protect: Crewmate):
+        """If the Crewmate is Guardian Angel, he can protect a crewmate."""
         if guardian_angel.role == "Guardian Angel" and guardian_angel in self.dead_players:
             count = 0
             for crewmate in self.crewmate_list:
@@ -93,6 +107,7 @@ class Spaceship:
                 crewmate_to_protect.protected = True
 
     def kill_crewmate(self, impostor: Impostor, color: str):
+        """If the Impostor kills a crewmate, the crewmate dies."""
         for crewmate in self.crewmate_list:
             if crewmate.color == color.title():
                 if crewmate.protected:
@@ -103,14 +118,17 @@ class Spaceship:
                     impostor.kills += 1
 
     def sort_crewmates_by_tasks(self):
+        """Sort the crewmates by tasks in ascending order."""
         sorted_crewmates = sorted(self.crewmate_list, key=lambda x: x.tasks)
         return ", ".join(crewmate.color for crewmate in sorted_crewmates)
 
     def sort_impostors_by_kills(self):
+        """Sort the impostors by kills in descending order."""
         sorted_impostors = sorted(self.impostor_list, key=lambda x: x.kills, reverse=True)
         return ", ".join(impostor.color for impostor in sorted_impostors)
 
     def get_regular_crewmates(self):
+        """Return a string of all regular crewmates in the spaceship."""
         regular_crewmates = []
         for crewmate in self.crewmate_list:
             if crewmate.role == "Crewmate":
@@ -118,6 +136,7 @@ class Spaceship:
         return ", ".join(crewmate.color for crewmate in regular_crewmates)
 
     def get_role_of_player(self, color: str):
+        """Return the role of the player with the given color."""
         for crewmate in self.crewmate_list:
             if crewmate.color == color.title():
                 return crewmate.role
@@ -125,10 +144,12 @@ class Spaceship:
             return "Impostor"
 
     def get_crewmate_with_most_tasks_done(self):
+        """Return the crewmate with the most tasks done."""
         crewmate_with_most_tasks = spaceship.sort_crewmates_by_tasks()[0]
         return crewmate_with_most_tasks
 
     def get_impostor_with_most_kills(self):
+        """Return the impostor with the most kills."""
         impostor_with_most_kills = spaceship.sort_impostors_by_kills()[0]
         return impostor_with_most_kills
 
@@ -212,4 +233,3 @@ if __name__ == "__main__":
     print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
     print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
     print(spaceship.get_regular_crewmates())  # -> White, Red
-
