@@ -251,6 +251,34 @@ class ChordOverlapException(Exception):
 
 
 if __name__ == '__main__':
+    note_one = Note('a')  # yes, lowercase
+    note_two = Note('C')
+    note_three = Note('Eb')
+    collection = NoteCollection()
+
+    print(note_one)  # <Note: A>
+    print(note_three)  # <Note: Eb>
+
+    collection.add(note_one)
+    collection.add(note_two)
+
+    print(collection.get_content())
+    # Notes:
+    #   * A
+    #   * C
+
+    print(collection.extract())  # [<Note: A>,<Note: C>]
+    print(collection.get_content())
+    # Notes:
+    #  Empty
+
+    collection.add(note_one)
+    collection.add(note_two)
+    collection.add(note_three)
+
+    print(collection.pop('a') == note_one)  # True
+    print(collection.pop('Eb') == note_three)  # True
+    
     chords = Chords()
     chords.add(Chord(Note('A'), Note('B'), 'Amaj', Note('C')))
     print(chords.get(Note('A'), Note('B'), Note('C')))  # ->  <Chord: Amaj>
