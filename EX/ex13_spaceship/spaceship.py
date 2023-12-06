@@ -75,7 +75,7 @@ class Spaceship:
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
         """If the Crewmate is sheriff, he can kill an impostor."""
-        if sheriff.role == "Sheriff":
+        if sheriff.role == "Sheriff" and sheriff in self.crewmate_list:
             for impostor in self.impostor_list:
                 if impostor.color == color.title():
                     self.impostor_list.remove(impostor)
@@ -85,7 +85,7 @@ class Spaceship:
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
         """If the Crewmate is altruist, he can revive a crewmate."""
-        if altruist.role == "Altruist" and dead_crewmate in self.dead_players:
+        if altruist.role == "Altruist" and altruist in self.crewmate_list and dead_crewmate in self.dead_players:
             self.crewmate_list.append(dead_crewmate)
             self.dead_players.remove(dead_crewmate)
             self.dead_players.append(altruist)
