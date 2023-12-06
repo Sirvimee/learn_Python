@@ -82,6 +82,7 @@ class Spaceship:
                     self.dead_players.append(impostor)
                 else:
                     self.dead_players.append(sheriff)
+                    self.crewmate_list.remove(sheriff)
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
         """If the Crewmate is altruist, he can revive a crewmate."""
