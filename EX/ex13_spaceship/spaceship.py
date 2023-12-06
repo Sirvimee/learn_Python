@@ -55,20 +55,21 @@ class Spaceship:
         return self.impostor_list
 
     def get_dead_players(self):
-        """Return a string of all dead players in the spaceship."""
-        return ", ".join(player.color for player in self.dead_players)
+        """Return a list of all dead players in the spaceship."""
+        return self.dead_players
 
     def add_crewmate(self, crewmate):
         """Add a crewmate to the spaceship."""
-        if not isinstance(crewmate, Impostor):
-            if crewmate not in self.crewmate_list and crewmate not in self.impostor_list:
-                self.crewmate_list.append(crewmate)
+        if not isinstance(crewmate, Impostor) and \
+                crewmate.color not in [c.color for c in self.crewmate_list] and \
+                crewmate.color not in [i.color for i in self.impostor_list]:
+            self.crewmate_list.append(crewmate)
 
     def add_impostor(self, impostor):
         """Add an impostor to the spaceship."""
         if not isinstance(impostor, Crewmate) and \
                 impostor.color not in [c.color for c in self.crewmate_list] and \
-                impostor.color not in [c.color for c in self.impostor_list] and \
+                impostor.color not in [i.color for i in self.impostor_list] and \
                 len(self.impostor_list) < 3:
             self.impostor_list.append(impostor)
 
@@ -89,8 +90,9 @@ class Spaceship:
         self.crewmate_list.remove(altruist)
 
     def protect_crewmate(self, guardian_angel: Crewmate, crewmate_to_protect: Crewmate):
-        """If the Crewmate is Guardian Angel, he can protect a crewmate."""
-        if guardian_angel.role == "Guardian Angel" and guardian_angel in self.dead_players:
+        """If the Crewmate is Guardian Angel, he can protect a crewmate, who is alive."""
+        if crewmate_to_protect in self.crewmate_list and \
+                guardian_angel.role == "Guardian Angel" and guardian_angel in self.dead_players:
             count = 0
             for crewmate in self.crewmate_list:
                 if crewmate.protected:
