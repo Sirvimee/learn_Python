@@ -74,11 +74,11 @@ class Spaceship:
 
     def add_impostor(self, impostor):
         """Add an impostor to the spaceship."""
-        if not isinstance(impostor, Crewmate):
-            if (impostor.color not in [c.color for c in self.crewmate_list] and
-                    impostor.color not in [c.color for c in self.impostor_list]):
-                if len(self.impostor_list) < 3:
-                    self.impostor_list.append(impostor)
+        if not isinstance(impostor, Crewmate) and \
+                impostor.color not in [c.color for c in self.crewmate_list] and \
+                impostor.color not in [c.color for c in self.impostor_list] and \
+                len(self.impostor_list) < 3:
+            self.impostor_list.append(impostor)
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
         """If the Crewmate is sheriff, he can kill an impostor."""
@@ -119,13 +119,11 @@ class Spaceship:
 
     def sort_crewmates_by_tasks(self):
         """Sort the crewmates by tasks in ascending order."""
-        sorted_crewmates = sorted(self.crewmate_list, key=lambda x: x.tasks)
-        return ", ".join(crewmate.color for crewmate in sorted_crewmates)
+        return sorted(self.crewmate_list, key=lambda x: x.tasks)
 
     def sort_impostors_by_kills(self):
         """Sort the impostors by kills in descending order."""
-        sorted_impostors = sorted(self.impostor_list, key=lambda x: x.kills, reverse=True)
-        return ", ".join(impostor.color for impostor in sorted_impostors)
+        return sorted(self.impostor_list, key=lambda x: x.kills, reverse=True)
 
     def get_regular_crewmates(self):
         """Return a string of all regular crewmates in the spaceship."""
@@ -133,22 +131,25 @@ class Spaceship:
         for crewmate in self.crewmate_list:
             if crewmate.role == "Crewmate":
                 regular_crewmates.append(crewmate)
-        return ", ".join(crewmate.color for crewmate in regular_crewmates)
+        return regular_crewmates
 
     def get_role_of_player(self, color: str):
         """Return the role of the player with the given color."""
         for crewmate in self.crewmate_list:
             if crewmate.color == color.title():
                 return crewmate.role
-        if color.title() in self.impostor_list:
-            return "Impostor"
+        for impostor in self.impostor_list:
+            if impostor.color == color.title():
+                return "Impostor"
 
-    def get_crewmate_with_most_tasks_done(self):
+    @staticmethod
+    def get_crewmate_with_most_tasks_done():
         """Return the crewmate with the most tasks done."""
-        crewmate_with_most_tasks = spaceship.sort_crewmates_by_tasks()[0]
-        return crewmate_with_most_tasks
+        crewmate_with_least_tasks = spaceship.sort_crewmates_by_tasks()[0]
+        return crewmate_with_least_tasks
 
-    def get_impostor_with_most_kills(self):
+    @staticmethod
+    def get_impostor_with_most_kills():
         """Return the impostor with the most kills."""
         impostor_with_most_kills = spaceship.sort_impostors_by_kills()[0]
         return impostor_with_most_kills
@@ -228,8 +229,10 @@ if __name__ == "__main__":
     print("Let's check if the sorting and filtering works correctly.")
 
     red.complete_task()
-    print(spaceship.get_role_of_player("Blue"))  # -> Sheriff
+    print(spaceship.get_role_of_player("orange"))  # -> Sheriff
     spaceship.kill_crewmate(purple, "blue")
     print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
     print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
     print(spaceship.get_regular_crewmates())  # -> White, Red
+    print(spaceship.get_crewmate_with_most_tasks_done())
+    print(spaceship.get_impostor_with_most_kills())
