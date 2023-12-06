@@ -47,19 +47,11 @@ class Spaceship:
         self.dead_players = []
 
     def get_crewmate_list(self):
-        """Return a string of all crewmates in the spaceship."""
-        if len(self.crewmate_list) > 0:
-            crewmates = ", ".join(crewmate.color for crewmate in self.crewmate_list[0: len(self.crewmate_list) - 1])
-            last_crewmate = self.crewmate_list[-1].color
-            return f"{crewmates} and {last_crewmate}"
+        """Return a list of all crewmates in the spaceship."""
         return self.crewmate_list
 
     def get_impostor_list(self):
-        """Return a string of all impostors in the spaceship."""
-        if len(self.impostor_list) > 0:
-            impostors = ", ".join(impostor.color for impostor in self.impostor_list[0: len(self.impostor_list) - 1])
-            last_impostor = self.impostor_list[-1].color
-            return f"{impostors} and {last_impostor}"
+        """Return a list of all impostors in the spaceship."""
         return self.impostor_list
 
     def get_dead_players(self):
@@ -142,16 +134,14 @@ class Spaceship:
             if impostor.color == color.title():
                 return "Impostor"
 
-    @staticmethod
-    def get_crewmate_with_most_tasks_done():
+    def get_crewmate_with_most_tasks_done(self):
         """Return the crewmate with the most tasks done."""
-        crewmate_with_least_tasks = spaceship.sort_crewmates_by_tasks()[0]
+        crewmate_with_least_tasks = Spaceship.sort_crewmates_by_tasks(self)[0]
         return crewmate_with_least_tasks
 
-    @staticmethod
-    def get_impostor_with_most_kills():
+    def get_impostor_with_most_kills(self):
         """Return the impostor with the most kills."""
-        impostor_with_most_kills = spaceship.sort_impostors_by_kills()[0]
+        impostor_with_most_kills = Spaceship.sort_impostors_by_kills(self)[0]
         return impostor_with_most_kills
 
 
