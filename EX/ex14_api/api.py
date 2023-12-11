@@ -27,7 +27,8 @@ def get_request_error_handling(url: str) -> int | requests.RequestException:
     :return: Server's response object or the exception object if an error occurs.
     """
     try:
-        requests.get(url)
+        response = requests.get(url)
+        return response.status_code
     except requests.exceptions.RequestException as e:
         return e
 
@@ -44,7 +45,7 @@ def post_request(url: str, data: dict) -> requests.RequestException:
     """
     try:
         response = requests.post(url, json=data)
-        return response.json()
+        return response.json().status_code
     except requests.exceptions.RequestException as e:
         return e
 
@@ -78,7 +79,10 @@ def stream_request(url: str) -> str:
     :return: A string containing the streamed content.
     """
     response = requests.get(url, stream=True)
-    return response.text
+    content = ""
+    for chunk in response.iter_content(chunk_size=1):
+        content += chunk.decode()
+    return content
 
 
 def get_authenticated_request(url: str, auth_token: str) -> Any | requests.RequestException:
