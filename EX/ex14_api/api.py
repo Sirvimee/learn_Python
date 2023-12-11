@@ -1,5 +1,4 @@
 """API exercise."""
-import json
 from typing import Any
 import requests
 import requests.exceptions
@@ -46,9 +45,10 @@ def post_request(url: str, data: dict) -> requests.Response:
     """
     try:
         response = requests.post(url, json=data)
+        response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
-        return e
+        return e.response
 
 
 def delete_request(url: str) -> int | requests.RequestException:
@@ -80,10 +80,11 @@ def stream_request(url: str) -> str:
     :return: A string containing the streamed content.
     """
     response = requests.get(url, stream=True)
+    content = ""
     for line in response.iter_lines():
         if line:
-            decoded_line = line.decode('utf-8')
-            return json.loads(decoded_line)
+            content += line.decode('utf-8') + "\n"
+    return content
 
 
 def get_authenticated_request(url: str, auth_token: str) -> Any | requests.RequestException:
