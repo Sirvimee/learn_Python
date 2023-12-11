@@ -30,10 +30,10 @@ def get_request_error_handling(url: str) -> int | requests.RequestException:
         response = requests.get(url)
         return response.status_code
     except requests.exceptions.RequestException as e:
-        return e
+        return e.response.status_code
 
 
-def post_request(url: str, data: dict) -> requests.RequestException:
+def post_request(url: str, data: dict):
     """
     Send an HTTP POST request with JSON data to the specified URL.
 
@@ -45,7 +45,7 @@ def post_request(url: str, data: dict) -> requests.RequestException:
     """
     try:
         response = requests.post(url, json=data)
-        return response.json().status_code
+        return response.json()
     except requests.exceptions.RequestException as e:
         return e
 
@@ -80,8 +80,8 @@ def stream_request(url: str) -> str:
     """
     response = requests.get(url, stream=True)
     content = ""
-    for chunk in response.iter_content(chunk_size=1):
-        content += chunk.decode()
+    for line in response.iter_lines(decode_unicode=True):
+        content += line + "\n"
     return content
 
 
