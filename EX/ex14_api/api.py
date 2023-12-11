@@ -1,4 +1,5 @@
 """API exercise."""
+import json
 from typing import Any
 import requests
 import requests.exceptions
@@ -82,7 +83,7 @@ def stream_request(url: str) -> str:
     for line in response.iter_lines():
         if line:
             decoded_line = line.decode('utf-8')
-            return decoded_line
+            return json.loads(decoded_line)
 
 
 def get_authenticated_request(url: str, auth_token: str) -> Any | requests.RequestException:
