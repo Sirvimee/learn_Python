@@ -24,7 +24,7 @@ def get_request_error_handling(url: str) -> int | requests.RequestException:
     Handle any exceptions that may occur during the request.
 
     :param url: The URL to which the GET request will be sent.
-    :return: Server's response object or the exception object if an error occurs.
+    :return: Server's response status code.
     """
     try:
         response = requests.get(url)
