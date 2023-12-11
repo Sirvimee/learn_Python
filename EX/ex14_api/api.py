@@ -33,7 +33,7 @@ def get_request_error_handling(url: str) -> int | requests.RequestException:
         return e.response.status_code
 
 
-def post_request(url: str, data: dict):
+def post_request(url: str, data: dict) -> requests.Response:
     """
     Send an HTTP POST request with JSON data to the specified URL.
 
@@ -79,10 +79,10 @@ def stream_request(url: str) -> str:
     :return: A string containing the streamed content.
     """
     response = requests.get(url, stream=True)
-    content = ""
-    for line in response.iter_lines(decode_unicode=True):
-        content += line + "\n"
-    return content
+    for line in response.iter_lines():
+        if line:
+            decoded_line = line.decode('utf-8')
+            return decoded_line
 
 
 def get_authenticated_request(url: str, auth_token: str) -> Any | requests.RequestException:
