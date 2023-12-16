@@ -2,7 +2,6 @@
 from typing import Any
 import requests
 import requests.exceptions
-from requests import RequestException
 
 
 def get_request(url: str) -> int:
