@@ -17,20 +17,20 @@ def get_request(url: str) -> int:
     return response.status_code
 
 
-def get_request_error_handling(url: str) -> int | requests.RequestException:
+def get_request_error_handling(url: str) -> int | requests.Response:
     """
     Send an HTTP GET request to the specified URL with error handling.
 
     Handle any exceptions that may occur during the request.
 
     :param url: The URL to which the GET request will be sent.
-    :return: Server's response status code.
+    :return: Server's response status code or the exception object if an error occurs.
     """
     try:
         response = requests.get(url)
         return response.status_code
     except requests.exceptions.RequestException as e:
-        return e.response.status_code
+        return e.response
 
 
 def post_request(url: str, data: dict) -> requests.Response:
@@ -46,7 +46,7 @@ def post_request(url: str, data: dict) -> requests.Response:
     try:
         response = requests.post(url, json=data)
         response.raise_for_status()
-        return response.json()
+        return response
     except requests.exceptions.RequestException as e:
         return e.response
 
