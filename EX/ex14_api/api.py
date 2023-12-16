@@ -2,6 +2,7 @@
 from typing import Any
 import requests
 import requests.exceptions
+from urllib3.exceptions import RequestError
 
 
 def get_request(url: str) -> int:
@@ -29,12 +30,11 @@ def get_request_error_handling(url: str) -> int | requests.Response:
     """
     try:
         response = requests.get(url)
-        if response.status_code == 200:
-            return response.status_code
-        else:
-            raise requests.exceptions.RequestException
+        if response.status_code >= 400:
+            raise RequestError(f"Request failed with status code {response.status_code}")
+        return response.status_code
     except requests.exceptions.RequestException as e:
-        return e.response
+        raise RequestError(f"Request failed: {e}") from e
 
 
 def post_request(url: str, data: dict) -> requests.Response:
