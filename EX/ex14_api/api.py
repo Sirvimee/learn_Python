@@ -2,6 +2,7 @@
 from typing import Any
 import requests
 import requests.exceptions
+from requests import RequestException
 
 
 def get_request(url: str) -> int:
@@ -17,7 +18,7 @@ def get_request(url: str) -> int:
     return response.status_code
 
 
-def get_request_error_handling(url: str) -> int | requests.Response:
+def get_request_error_handling(url: str):
     """
     Send an HTTP GET request to the specified URL with error handling.
 
@@ -32,9 +33,9 @@ def get_request_error_handling(url: str) -> int | requests.Response:
         if response.status_code == 200:
             return response.status_code
         else:
-            raise requests.exceptions.RequestException
-    except requests.exceptions.RequestException as e:
-        return e.response
+            raise requests.RequestException
+    except requests.RequestException as e:
+        return e
 
 
 def post_request(url: str, data: dict) -> requests.Response:
