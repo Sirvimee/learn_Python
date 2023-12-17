@@ -202,7 +202,9 @@ class MovieFilter:
         """
         if year is None or year < 0:
             raise ValueError('None value given as year')
-        return self.movie_data[self.movie_data['title'].str.contains(str(year), case=False)]
+
+        year_str = rf"\({year}\)"
+        return self.movie_data[self.movie_data['title'].str.contains(year_str)]
 
     def get_decent_movies(self) -> pd.DataFrame:
         """
@@ -218,8 +220,9 @@ class MovieFilter:
 
         :return: pandas DataFrame object of the search result
         """
-        return self.movie_data[self.movie_data['rating'] >= 3.0][
-            self.movie_data['genres'].str.contains('Comedy', case=False)]
+        decent_ratings = self.movie_data[self.movie_data['rating'] >= 3.0]
+        filtered_movies = decent_ratings[decent_ratings['genres'].str.contains('Comedy', case=False)]
+        return filtered_movies
 
     def get_decent_children_movies(self) -> pd.DataFrame | None:
         """
@@ -227,8 +230,9 @@ class MovieFilter:
 
         :return: pandas DataFrame object of the search result
         """
-        return self.movie_data[self.movie_data['rating'] >= 3.0][
-            self.movie_data['genres'].str.contains('Children', case=False)]
+        decent_ratings = self.movie_data[self.movie_data['rating'] >= 3.0]
+        filtered_movies = decent_ratings[decent_ratings['genres'].str.contains('Children', case=False)]
+        return filtered_movies
 
 
 if __name__ == '__main__':
@@ -285,7 +289,8 @@ if __name__ == '__main__':
 
         my_movie_filter = MovieFilter()
         my_movie_filter.set_movie_data(my_movie_data.get_aggregate_movie_dataframe())
-        print(my_movie_filter.filter_movies_by_rating_value(2.1, 'less_than'))  # ->
+        print("By ratings")
+        print(my_movie_filter.filter_movies_by_rating_value(1, 'equals'))  # ->
         #       movieId             title                                       genres  rating               tag
         # 26          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     0.5   pixar pixar fun
         # 43          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
