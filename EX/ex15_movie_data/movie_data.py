@@ -70,7 +70,7 @@ class MovieData:
         tags = tags.drop(labels=['userId', 'timestamp'], axis=1)
         tags = tags.groupby('movieId')['tag'].apply(' '.join).reset_index()
 
-        movies_ratings = pd.merge(movies, ratings, on='movieId')
+        movies_ratings = pd.merge(movies, ratings, on='movieId', how='left')
         movies_ratings_tags = pd.merge(movies_ratings, tags, on='movieId', how='left')
 
         movies_ratings_tags['tag'] = movies_ratings_tags['tag'].fillna(nan_placeholder)
