@@ -20,10 +20,16 @@ def parse_animal(animal_str: str) -> list:
     :param animal_str: The input string containing animal data.
     :return: A list containing structured animal data.
     """
+
+    def convert_to_number(data):
+        if '.' in data:
+            return float(data)
+        return int(data)
+
     species, scientific_name, age_up_to, weight_range, height_range, diet, habitat = animal_str.split(',')
 
-    min_weight, max_weight = map(float, weight_range.split('-'))
-    min_height, max_height = map(float, height_range.split('-'))
+    min_weight, max_weight = map(convert_to_number, weight_range.split('-'))
+    min_height, max_height = map(convert_to_number, height_range.split('-'))
 
     return [species, scientific_name, int(age_up_to), [min_weight, max_weight], [min_height, max_height], diet, habitat]
 
@@ -236,8 +242,8 @@ def create_animal_descriptions(animal_data: list) -> list:
     """
     info = list(map(lambda animal: f"{animal[0]} ({animal[1]}) lives in {animal[6]} and its diet is {animal[5]}. "
                                    f"These animals can live up to {animal[2]} years, "
-                                   f"and they weigh between {int(animal[3][0])} kg "
-                                   f"and {int(animal[3][1])} kg as adults.", animal_data))
+                                   f"and they weigh between {animal[3][0]} kg "
+                                   f"and {animal[3][1]} kg as adults.", animal_data))
     return info
 
 
