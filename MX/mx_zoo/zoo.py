@@ -107,8 +107,7 @@ def total_noise_level(animal_data: list) -> float:
 
 def zoo_parade_length(animal_data: list) -> float:
     """
-    Calculate the total length of a zoo parade based on the horizontal length of all animals.
-    There is just one animal of each species.
+    Calculate the total length of a zoo parade based on the horizontal length of all animals. There is just one animal of each species.
 
     The length added by each animal is assumed to be equivalent to the average of their height range.
 
