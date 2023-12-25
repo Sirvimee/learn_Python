@@ -1,4 +1,5 @@
 """Mama's donuteria."""
+from math import ceil
 
 
 class Donut:
@@ -85,7 +86,7 @@ def find_flour_needed_for_baking(donut_list: list[Donut], quantity: int) -> int:
     :param quantity: The quantity of each donut to be baked.
     :return: Total amount of flour needed in grams rounded up.
     """
-    return round(sum(map(lambda donut: donut.price * quantity * 80, donut_list)))
+    return ceil(sum(map(lambda donut: donut.price * quantity * 80, donut_list)))
 
 
 def calculate_tip(donut_list: list[Donut], customers: int) -> int:
