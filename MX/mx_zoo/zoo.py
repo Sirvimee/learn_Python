@@ -194,7 +194,8 @@ def find_animals_whose_height_is_less_than(animal_data: list, height_limit: floa
     :return: List of common names of animals that are shorter than the height limit, sorted from shortest to tallest.
     """
     filtered_animals = list(filter(lambda animal: animal[4][1] < height_limit, animal_data))
-    return sorted(map(lambda animal: animal[0], filtered_animals), reverse=True)
+    sorted_animals = sorted(filtered_animals, key=lambda animal: animal[4][1])
+    return [animal[0] for animal in sorted_animals]
 
 
 def filter_animals_based_on_diet(animal_data: list, diet: str) -> list:
@@ -222,8 +223,8 @@ def find_animal_with_longest_lifespan(animal_data: list) -> str:
     :param animal_data: List of structured animal data.
     :return: The common name of the animal with the longest lifespan.
     """
-    longest_lifespan = sorted(map(lambda animal: animal[0], animal_data))[0]
-    return longest_lifespan
+    animal_with_longest_lifespan = max(animal_data, key=lambda animal: animal[2])
+    return animal_with_longest_lifespan[0]
 
 
 def create_animal_descriptions(animal_data: list) -> list:
