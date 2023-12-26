@@ -21,9 +21,9 @@ def create_simple_pyramid_left(height: int, row=0, word="") -> str:
         return ""
 
     word += "*"
-    print(word)
+    result = word + "\n"
 
-    return create_simple_pyramid_left(height, row + 1, word)
+    return result + create_simple_pyramid_left(height, row + 1, word)
 
 
 def create_simple_pyramid_right(height: int, current=1) -> str:
@@ -44,11 +44,14 @@ def create_simple_pyramid_right(height: int, current=1) -> str:
     if current > height:
         return ""
 
+    if current == 0:
+        return ""
+
     spaces = " " * (height - current)
     word = "*" * current
-    print(spaces + word)
+    result = spaces + word + "\n"
 
-    return create_simple_pyramid_right(height, current + 1)
+    return result + create_simple_pyramid_right(height, current + 1)
 
 
 def create_number_pyramid_left(height: int, current=1, word="") -> str:
@@ -71,9 +74,9 @@ def create_number_pyramid_left(height: int, current=1, word="") -> str:
         return ""
 
     word += str(current)
-    print(word)
+    result = word + "\n"
 
-    return create_number_pyramid_left(height, current + 1, word)
+    return result + create_number_pyramid_left(height, current + 1, word)
 
 
 def create_number_pyramid_right(height: int, current=1, word="") -> str:
@@ -97,9 +100,9 @@ def create_number_pyramid_right(height: int, current=1, word="") -> str:
 
     spaces = " " * (height - current)
     word += str(current)
-    print(spaces + word[::-1])
+    result = spaces + word[::-1] + "\n"
 
-    return create_number_pyramid_right(height, current + 1, word)
+    return result + create_number_pyramid_right(height, current + 1, word)
 
 
 def create_number_pyramid_left_down(height: int, current=1) -> str:
@@ -121,9 +124,9 @@ def create_number_pyramid_left_down(height: int, current=1) -> str:
         return ""
 
     word = "".join(str(i) for i in range(height, current - 1, -1))
-    print(word)
+    result = word + "\n"
 
-    return create_number_pyramid_left_down(height - 1, current)
+    return result + create_number_pyramid_left_down(height - 1, current)
 
 
 def create_number_pyramid_right_down(height: int, current=1) -> str:
@@ -143,9 +146,9 @@ def create_number_pyramid_right_down(height: int, current=1) -> str:
         return ""
 
     row = "".join(str(i) for i in range(1, height - current + 2))
-    print(row.rjust(height))
+    result = row.rjust(height) + "\n"
 
-    return create_number_pyramid_right_down(height, current + 1)
+    return result + create_number_pyramid_right_down(height, current + 1)
 
 
 def create_regular_pyramid(height: int, current=1) -> str:
@@ -168,10 +171,9 @@ def create_regular_pyramid(height: int, current=1) -> str:
 
     spaces = " " * (height - current)
     word = "*" * (2 * current - 1)
+    result = spaces + word + "\n"
 
-    print(spaces + word)
-
-    return create_regular_pyramid(height, current + 1)
+    return result + create_regular_pyramid(height, current + 1)
 
 
 def create_regular_pyramid_upside_down(height: int, current=1) -> str:
@@ -194,10 +196,9 @@ def create_regular_pyramid_upside_down(height: int, current=1) -> str:
 
     spaces = " " * (current - 1)
     word = "*" * (2 * (height - current) + 1)
+    result = spaces + word + "\n"
 
-    print(spaces + word)
-
-    return create_regular_pyramid_upside_down(height, current + 1)
+    return result + create_regular_pyramid_upside_down(height, current + 1)
 
 
 def create_diamond(height: int, current=1, direction="up") -> str:
@@ -225,17 +226,16 @@ def create_diamond(height: int, current=1, direction="up") -> str:
 
     spaces = " " * (height - current)
     word = "*" * (2 * current - 1)
+    result = spaces + word + "\n"
 
     if current == height:
-        print(spaces + word)
+        result += spaces + word + "\n"
         direction = "down"
 
-    print(spaces + word)
-
     if direction == "up":
-        return create_diamond(height, current + 1, direction)
+        return result + create_diamond(height, current + 1, direction)
     else:
-        return create_diamond(height, current - 1, direction)
+        return result + create_diamond(height, current - 1, direction)
 
 
 def create_empty_pyramid(height: int, current=1) -> str:
@@ -260,10 +260,10 @@ def create_empty_pyramid(height: int, current=1) -> str:
     word = "*" * (2 * current - 1)
 
     if current == 1:
-        print(spaces + word)
+        result = spaces + word + "\n"
     elif current == height:
-        print("*" * (2 * height - 1))
+        result = "*" * (2 * height - 1) + "\n"
     else:
-        print(spaces + "*" + " " * (2 * current - 3) + "*")
+        result = spaces + "*" + " " * (2 * current - 3) + "*" + "\n"
 
-    return create_empty_pyramid(height, current + 1)
+    return result + create_empty_pyramid(height, current + 1)
