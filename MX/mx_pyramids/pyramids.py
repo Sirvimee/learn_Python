@@ -104,6 +104,8 @@ def create_number_pyramid_right(height: int, current=1, word="") -> str:
 
     return result + create_number_pyramid_right(height, current + 1, word)
 
+print(create_number_pyramid_right(30))
+
 
 def create_number_pyramid_left_down(height: int, current=1) -> str:
     """
@@ -145,9 +147,10 @@ def create_number_pyramid_right_down(height: int, current=1) -> str:
     if current > height:
         return ""
 
-    row = "".join(str(i) for i in range(1, height - current + 2))
-    result = row.rjust(height) + "\n"
+    spaces = " " * (current - 1)
 
+    row = "".join(str(i) for i in range(1, height - current + 2))
+    result = spaces + row + "\n"
     return result + create_number_pyramid_right_down(height, current + 1)
 
 
