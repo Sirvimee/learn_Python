@@ -107,7 +107,7 @@ def group_plants_by_growth_type(growth_type: dict) -> dict:
 
 
 # Exercise 7: Generate Garden Layout
-def generate_garden_layout(rows: int, columns: int, plant_varieties: list,  exclusion_list: list) -> dict:
+def generate_garden_layout(rows: int, columns: int, plant_varieties: list, exclusion_list: list) -> dict:
     """
     Generate a garden layout with rows and columns, assigning random plant varieties to each location.
 
@@ -146,9 +146,9 @@ def calculate_sunlight_requirements(plant_types: dict, sunlight_needs: dict, wea
     :param weather_condition: current weather condition
     :return: dictionary with plants as keys and sunlight requirements as values
     """
-    return {plant: round(1.2 * sunlight_needs[plant] if weather_condition is "sunny"
+    return {plant: round(1.2 * sunlight_needs[plant] if weather_condition == "sunny"
                          else 0.8 * sunlight_needs[plant], 2)
-            for plant in plant_types if plant_types[plant] is "Sun-Loving"}
+            for plant in plant_types if plant_types[plant] == "Sun-Loving"}
 
 
 # Exercise 9: Count Plant Types
@@ -167,7 +167,7 @@ def count_plant_types(plants: list) -> dict:
 # Exercise 10: Determine Garden Plant Health
 def determine_plant_health(plants: list, watering_frequency: dict, sunlight_hours: dict, pest_infestation: dict) -> dict:
     """
-    Exercise 10: Determine Garden Plant Health
+    Determine Garden Plant Health.
 
     Determine the health status of garden plants based on multiple factors such as watering frequency, sunlight hours,
     and pest infestation.
