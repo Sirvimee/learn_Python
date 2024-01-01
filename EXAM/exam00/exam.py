@@ -63,6 +63,9 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     get_names_from_results("ago 123,peeter 11,kusti riin 14", 12) => ["ago", "kusti riin"]
     """
     names = []
+    if not results_string:
+        return names
+
     for name in results_string.split(","):
         if int(name.split(" ")[-1]) >= min_result:
             if len(name.split(" ")) > 1:
@@ -236,8 +239,8 @@ def add_result_to_student(student: Student, grades_count: int, new_grade: int, c
     if student.average_grade == 0:
         student.average_grade = new_grade
     else:
-        student.average_grade = (student.average_grade * grades_count + new_grade) / (grades_count + 1)
-    student.average_grade = ceil(student.average_grade * 1000) / 1000
+        new_average = ((student.average_grade * grades_count) + new_grade) / (grades_count + 1)
+        student.average_grade = round(new_average, 3)
     student.credit_points += credit_points
     return student
 
@@ -321,17 +324,22 @@ class Hotel:
             return None
 
         max_matching_features = 0
-        best_room = None
+        best_rooms = []
 
         for room in available_rooms:
             matching_features = sum(1 for feature in required_features if feature in room.features)
-            if matching_features > max_matching_features or (matching_features == max_matching_features and (
-                    best_room is None or room.number < best_room.number)):
+            if matching_features > max_matching_features:
                 max_matching_features = matching_features
-                room.booked = True
-                best_room = room
+                best_rooms = [room]
+            elif matching_features == max_matching_features:
+                best_rooms.append(room)
 
-        return best_room
+        if best_rooms:
+            best_room = sorted(best_rooms, key=lambda room: room.number)[0]
+            best_room.booked = True
+            return best_room
+
+        return None
 
     def get_available_rooms(self) -> list:
         """Return a list of available (not booked) rooms."""
