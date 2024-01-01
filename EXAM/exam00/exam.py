@@ -319,7 +319,6 @@ class Hotel:
         If there are several with the same amount of matching features, return the one with the smallest room number.
         If there is no available rooms, return None
         """
-        required_features = list(set(required_features))
         available_rooms = [room for room in self.rooms if not room.booked]
 
         if not available_rooms:
