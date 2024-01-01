@@ -320,9 +320,11 @@ class Hotel:
         If there is no available rooms, return None
         """
         if not required_features:
-            available_room = self.get_available_rooms()[0]
-            available_room.booked = True
-            return available_room
+            available_rooms = self.get_available_rooms()
+            if available_rooms:
+                available_rooms[0].booked = True
+                return available_rooms[0]
+            return None
 
         available_rooms = self.get_available_rooms()
         if not available_rooms:
@@ -330,16 +332,20 @@ class Hotel:
 
         best_matching_room = None
         max_matching_features = 0
+
         for room in available_rooms:
             matching_features = sum([1 for feature in required_features if feature in room.features])
             if matching_features > max_matching_features:
                 max_matching_features = matching_features
                 best_matching_room = room
-            elif matching_features == max_matching_features:
-                if room.number < best_matching_room.number:
-                    best_matching_room = room
-        best_matching_room.booked = True
-        return best_matching_room
+            elif matching_features == max_matching_features and room.number < best_matching_room.number:
+                best_matching_room = room
+
+            if best_matching_room:
+                best_matching_room.booked = True
+                return best_matching_room
+
+            return None
 
     def get_available_rooms(self) -> list:
         """Return a list of available (not booked) rooms."""
