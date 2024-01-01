@@ -319,27 +319,27 @@ class Hotel:
         If there are several with the same amount of matching features, return the one with the smallest room number.
         If there is no available rooms, return None
         """
-        available_rooms = [room for room in self.rooms if not room.booked]
+        if not required_features:
+            available_room = self.get_available_rooms()[0]
+            available_room.booked = True
+            return available_room
+
+        available_rooms = self.get_available_rooms()
         if not available_rooms:
             return None
 
+        best_matching_room = None
         max_matching_features = 0
-        best_rooms = []
-
         for room in available_rooms:
-            matching_features = sum(1 for feature in required_features if feature in room.features)
+            matching_features = sum([1 for feature in required_features if feature in room.features])
             if matching_features > max_matching_features:
                 max_matching_features = matching_features
-                best_rooms = [room]
+                best_matching_room = room
             elif matching_features == max_matching_features:
-                best_rooms.append(room)
-
-        if best_rooms:
-            best_room = sorted(best_rooms, key=lambda room: room.number)[0]
-            best_room.booked = True
-            return best_room
-
-        return None
+                if room.number < best_matching_room.number:
+                    best_matching_room = room
+        best_matching_room.booked = True
+        return best_matching_room
 
     def get_available_rooms(self) -> list:
         """Return a list of available (not booked) rooms."""
@@ -400,6 +400,7 @@ class Hotel:
 
 
 if __name__ == '__main__':
+
     hotel = Hotel()
     room1 = Room(1, 100)
     room1.add_feature("tv")
@@ -413,7 +414,6 @@ if __name__ == '__main__':
     assert hotel.add_room(room3) is False
     assert hotel.get_rooms() == [room1, room2]
     assert hotel.get_booked_rooms() == []
-
     assert hotel.book_room(["tv", "president"]) == room1
     assert hotel.get_available_rooms() == [room2]
     assert hotel.get_booked_rooms() == [room1]
