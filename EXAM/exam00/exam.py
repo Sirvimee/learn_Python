@@ -63,9 +63,10 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     get_names_from_results("ago 123,peeter 11,kusti riin 14", 12) => ["ago", "kusti riin"]
     """
     names = []
-    for result in results_string.split(","):
-        if int(result.split(" ")[-1]) >= min_result:
-            names.append(" ".join(result.split(" ")[:-1]))
+    for name in results_string.split(","):
+        if int(name.split(" ")[-1]) >= min_result:
+            if len(name.split(" ")) > 1:
+                names.append(" ".join(name.split(" ")[:-1]))
     return names
 
 
@@ -318,25 +319,18 @@ class Hotel:
         available_rooms = [room for room in self.rooms if not room.booked]
         if not available_rooms:
             return None
-        if not required_features:
-            available_rooms[0].booked = True
-            return available_rooms[0]
 
-        best_room = available_rooms[0]
-        max_features = 0
+        max_matching_features = 0
+        best_room = None
+
         for room in available_rooms:
-            features = 0
-            for feature in required_features:
-                if feature in room.features:
-                    features += 1
-            if features > max_features:
-                max_features = features
+            matching_features = sum(1 for feature in required_features if feature in room.features)
+            if matching_features > max_matching_features or (matching_features == max_matching_features and (
+                    best_room is None or room.number < best_room.number)):
+                max_matching_features = matching_features
+                room.booked = True
                 best_room = room
-            elif features == max_features:
-                if room.number < best_room.number:
-                    best_room = room
 
-        best_room.booked = True
         return best_room
 
     def get_available_rooms(self) -> list:

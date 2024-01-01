@@ -9,6 +9,7 @@ def longest_unique_subsed(text):
             if len(seq) > len(longest_seq):
                 longest_seq = seq
                 seq = ""
+                seq += letter
     if len(seq) > len(longest_seq):
         longest_seq = seq
 
