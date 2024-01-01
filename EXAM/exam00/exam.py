@@ -37,14 +37,10 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(1, 2, 3) => False
     close_far(4, 1, 3) => True
     """
-    if a == b or b == a + 1 or b == a - 1:
-        if b != c and c != b + 1 and c != b - 1:
-            return True
-
-    if a == c or c == a + 1 or c == a-1:
-        if c != b and b != c + 1 and b != c - 1:
-            return True
-
+    if abs(a - b) <= 1 and abs(a - c) >= 2 and abs(b - c) >= 2:
+        return True
+    if abs(a - c) <= 1 and abs(a - b) >= 2 and abs(b - c) >= 2:
+        return True
     return False
 
 
@@ -66,18 +62,11 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11) => ["ago", "peeter",  "kitty11!!"]
     get_names_from_results("ago 123,peeter 11,kusti riin 14", 12) => ["ago", "kusti riin"]
     """
-    list_of_names = results_string.split(",")
-    result_list = []
-
-    for name in list_of_names:
-        result = int(name.split()[-1])
-        if result >= min_result:
-            name = name.split()
-            name = " ".join(name[0:-1])
-            if name:
-                result_list.append(name)
-
-    return result_list
+    names = []
+    for result in results_string.split(","):
+        if int(result.split(" ")[-1]) >= min_result:
+            names.append(" ".join(result.split(" ")[:-1]))
+    return names
 
 
 def tic_tac_toe(game: list) -> int:
@@ -117,7 +106,7 @@ def tic_tac_toe(game: list) -> int:
     return 0
 
 
-def rainbows(field: str, lower=False, found=False) -> int:
+def rainbows(field: str, count=0) -> int:
     """
     Count rainbows.
 
@@ -130,19 +119,15 @@ def rainbows(field: str, lower=False, found=False) -> int:
     assert rainbows("rainbowobniar") == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
     :param field: string to search rainbows from
-    :param lower: whether the previous letter was lower case
-    :param found: whether a rainbow has been found
+    :param count: number of rainbows found so far
     :return: number of rainbows in the string
     """
     if len(field) < 7:
-        return 0
-    if field[0:7].lower() == "rainbow" or field[0:7][::-1].lower() == "rainbow":
-        if found:
-            return rainbows(field[1:], lower, False)
-        else:
-            return 1 + rainbows(field[1:], lower, True)
-    else:
-        return rainbows(field[1:], lower, found)
+        return count
+    if field[:7].lower() == "rainbow" or field[0:7][::-1].lower() == "rainbow":
+        count += 1
+        return rainbows(field[7:], count)
+    return rainbows(field[1:], count)
 
 
 def longest_substring(text: str) -> str:
@@ -163,20 +148,17 @@ def longest_substring(text: str) -> str:
     abBcd => Bcd
     '' -> ''
     """
-    seq = ""
-    longest_seq = ""
-    for letter in text:
-        if letter.lower() not in seq.lower():
-            seq += letter
-        else:
-            if len(seq) > len(longest_seq):
-                longest_seq = seq
-                seq = ""
-                seq += letter
-    if len(seq) > len(longest_seq):
-        longest_seq = seq
-
-    return longest_seq
+    longest_substring = ""
+    for i in range(len(text)):
+        substring = ""
+        for letter in text[i:]:
+            if letter.lower() not in substring.lower():
+                substring += letter
+            else:
+                break
+        if len(substring) > len(longest_substring):
+            longest_substring = substring
+    return longest_substring
 
 
 class Student:
@@ -200,8 +182,7 @@ def create_student(name: str, grades: list, credit_points: int) -> Student:
         avg_grade = 0
     else:
         avg_grade = sum(grades) / len(grades)
-
-    avg_grade = ceil(avg_grade, 3)
+        avg_grade = ceil(avg_grade * 1000) / 1000
 
     return Student(name, avg_grade, credit_points)
 
@@ -251,12 +232,13 @@ def add_result_to_student(student: Student, grades_count: int, new_grade: int, c
 
     Return the modified student object.
     """
-    old_sum = student.average_grade * grades_count
-    new_sum = old_sum + new_grade
-    new_avg = new_sum / (grades_count + 1)
-    new_avg = ceil(new_avg, 3)
-
-    return Student(student.name, new_avg, student.credit_points + credit_points)
+    if student.average_grade == 0:
+        student.average_grade = new_grade
+    else:
+        student.average_grade = (student.average_grade * grades_count + new_grade) / (grades_count + 1)
+    student.average_grade = ceil(student.average_grade * 1000) / 1000
+    student.credit_points += credit_points
+    return student
 
 
 def get_ordered_students(students: list) -> list:
