@@ -222,6 +222,9 @@ def create_diamond(height: int, current=1, direction="up") -> str:
     :param direction: Keeping track of current direction.
     :return: Diamond.
     """
+    if current > height:
+        return ""
+
     if current == 0:
         return ""
 
